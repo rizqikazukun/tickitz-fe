@@ -1,5 +1,6 @@
 import React from 'react';
-import './style/App.css';
+import './styles/App.css';
+import MovieCard from './components/MovieCard';
 
 function App() {
 
@@ -73,6 +74,8 @@ function App() {
     }
   })
 
+  const months = ["January", "February", "march", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
 
   return (
     <div className="App">
@@ -140,20 +143,11 @@ function App() {
             </div>
           </div>
           <div id="now-showing-movie-scroll" className="container movie-scroll text-center">
-            <div className="card movie-scroll-card" style={{ borderColor: "#ececec" }}>
-              <img
-                src="./assets/img/poster/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_SX300.jpg"
-                className="movie-scroll-card-img" alt="movie" />
-              <div className="card-body">
-                <h5 className="card-title movie-scroll-title">Openheimer</h5>
-                <p className="card-text movie-scroll-genres">
-                  History, Action, Thriller
-                </p>
-                <button type="button" className="btn ">
-                  Details
-                </button>
-              </div>
-            </div>
+            < MovieCard />
+            < MovieCard />
+            < MovieCard />
+            < MovieCard />
+            < MovieCard />
           </div>
         </section>
         {/* <!-- end of now showing section --> */}
@@ -173,34 +167,15 @@ function App() {
           </div>
 
           <div id="months-scroll" className="container months-scroll text-center">
-            <button type="button" className="btn months-scroll-item">January</button>
-            <button type="button" className="btn months-scroll-item">February</button>
-            <button type="button" className="btn months-scroll-item">March</button>
-            <button type="button" className="btn months-scroll-item">April</button>
-            <button type="button" className="btn months-scroll-item">May</button>
-            <button type="button" className="btn months-scroll-item">June</button>
-            <button type="button" className="btn months-scroll-item">July</button>
-            <button type="button" className="btn months-scroll-item">August</button>
-            <button type="button" className="btn months-scroll-item">September</button>
-            <button type="button" className="btn months-scroll-item">October</button>
-            <button type="button" className="btn months-scroll-item">November</button>
-            <button type="button" className="btn months-scroll-item">December</button>
+            {months.map(monthName => (<button type="button" className="btn months-scroll-item">{monthName}</button>))}
           </div>
 
           <div id="upcoming-movies-scroll" className="container movie-scroll text-center">
-            <div className="card movie-scroll-card" style={{ borderColor: "#ececec" }}>
-              <img src="./assets/img/poster/MV5BMTQ4OTgzNTkwNF5BMl5BanBnXkFtZTgwMzI3MDE3NDE@._V1_SX300.jpg"
-                className="movie-scroll-card-img" alt="movie" />
-              <div className="card-body">
-                <h5 className="card-title movie-scroll-title">Tomorrow Land</h5>
-                <p className="card-text movie-scroll-genres">
-                  Adventure, Science fiction, Family
-                </p>
-                <button type="button" className="btn ">
-                  Details
-                </button>
-              </div>
-            </div>
+            < MovieCard />
+            < MovieCard />
+            < MovieCard />
+            < MovieCard />
+            < MovieCard />
           </div>
         </section>
         {/* <!-- end of upcoming movies section --> */}
