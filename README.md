@@ -25,6 +25,7 @@ serve -s build
 
 ## Routing Table
 
-**Page Name** | **URI**
---------------|---------
-Home | /  
+**Pages** | **URI** | **Slug**
+--------------|:-------:|:--------:
+Home          |    /    |  no
+Detail        | /detail | yes
