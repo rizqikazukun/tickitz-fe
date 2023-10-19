@@ -1,0 +1,121 @@
+
+/* months scroll component */
+
+.months-scroll {
+  padding: 25px;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  transition: 0.5s;
+  gap: 20px;
+}
+
+.months-scroll-item {
+  flex-grow: 1;
+  min-width: 125px;
+  color: var(--tic-branding-color-middle);
+  background-color: transparent;
+  border-color: var(--tic-branding-color-middle);
+}
+
+.months-scroll-item:hover {
+  color: #ffffff;
+  background-color: var(--tic-branding-color-middle);
+  border-color: var(--tic-branding-color-middle);
+}
+
+.months-scroll-item:active {
+  color: #ffffff;
+  background-color: var(--tic-branding-color-middle);
+  border-color: var(--tic-branding-color-middle);
+}
+
+/* end of months scroll component */
+
+
+/* header */
+
+#header-left-section h1 {
+  background-clip: text;
+  font-size: 56px;
+  font-weight: 700 !important;
+  background: var(--tic-branding-color-middle);
+  background: var(--tic-branding-gradient);
+  /* i thing it's will broke in some devices */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#header-left-section p {
+  color: var(--tic-color-muted);
+  font-size: 24px;
+  font-weight: 400 !important;
+}
+
+/* end of header */
+
+/* now showing section */
+
+#now-showing {
+  padding: 50px 20px 30px 20px;
+  background-color: var(--tic-color-section);
+}
+
+#now-showing h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--tic-branding-color-middle);
+}
+
+/* end now showing section */
+
+/* upcoming movies section */
+
+#upcoming-movies {
+  padding: 50px 20px 30px 20px;
+  background-color: #fff;
+}
+
+#upcoming-movies h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--tic-branding-color-middle);
+}
+
+/* end of upcoming movies section */
+
+/* Call to Action section */
+
+#call-to-action h1 {
+  background-clip: text;
+  font-size: 48px;
+  font-weight: 700 !important;
+  background: var(--tic-branding-color-middle);
+  background: var(--tic-branding-gradient);
+  /* i thing it's will broke in some devices */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#call-to-action p {
+  color: var(--tic-color-muted);
+  font-size: 24px;
+  font-weight: 400 !important;
+}
+
+#input-email {
+  color: white;
+  background-image: var(--tic-branding-gradient);
+  border: unset;
+}
+
+.text-indicator {
+  padding-bottom: 7px;
+  border-bottom: 3px solid var(--tic-branding-color-middle);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+/* end of Call to Action section */
+
+

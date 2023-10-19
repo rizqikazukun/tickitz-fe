@@ -1,0 +1,15 @@
+/* footer */
+
+.footer-item-title {
+  font-size: 16; 
+  font-weight: 700; 
+  color: var(--tic-color-black-absolute);
+}
+
+.footer-item-content {
+  font-size: 16; 
+  font-weight: 400; 
+  color: var(--tic-color-muted);
+}
+
+/* end of footer */

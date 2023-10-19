@@ -1,0 +1,61 @@
+
+/* movie scroll component */
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.movie-scroll {
+    padding: 25px;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    transition: 0.5s;
+    gap: 20px;
+  }
+  
+  .movie-scroll-card {
+    flex-grow: 1;
+    min-width: 180px;
+    max-width: 240px;
+    padding: 20px;
+    background-color: transparent;
+  }
+  
+  .movie-scroll-card button {
+    width: 100%;
+    color: var(--tic-branding-color-middle);
+    border-color: var(--tic-branding-color-middle);
+  }
+  
+  .movie-scroll-card button:hover {
+    width: 100%;
+    color: white;
+    background-color: var(--tic-branding-color-middle);
+    border-color: var(--tic-branding-color-middle);
+  }
+  
+  .movie-scroll-card-img {
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+    text-align: center;
+    border-radius: 5px;
+  }
+  
+  .movie-scroll-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--tic-color-black);
+  }
+  
+  .movie-scroll-genres {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--tic-color-muted);
+  }
+  
+  /* end of movie scroll component */

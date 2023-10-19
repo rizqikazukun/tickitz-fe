@@ -23,3 +23,8 @@ serve -s build
 - Serve  
 ``npm install -g serve``
 
+## Routing Table
+
+**Page Name** | **URI**
+--------------|---------
+Home | /  

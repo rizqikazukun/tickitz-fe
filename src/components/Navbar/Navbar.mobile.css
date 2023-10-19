@@ -1,0 +1,15 @@
+.mobile-component {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .mobile-component {
+        display: unset;
+    }
+
+    .desktop-component {
+        display: none;
+    }
+
+
+}
