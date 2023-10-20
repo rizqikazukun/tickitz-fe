@@ -7,6 +7,7 @@ import axios from 'axios'
 import { Player } from '@lottiefiles/react-lottie-player'
 import '../styles/MovieDetail.css'
 
+
 const MovieDetail = () => {
 
 
@@ -32,7 +33,7 @@ const MovieDetail = () => {
 				{movies.length === 0 ?
 					<div className='m-auto'>
 						<Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
-					</div> :
+					</div> : 
 					movies
 						.filter(movie => String(movie.tittle)
 							.toLowerCase()
