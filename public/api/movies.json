@@ -1,0 +1,122 @@
+[
+  {
+    "poster": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Influencer_Poster.png/800px-Influencer_Poster.png",
+    "title": "Influencer",
+    "desc": "Social media fame is the ultimate curse in writer-director Kurtis David Harder’s latest. Released as a Shudder Original, Influencer set itself apart from traditional horror fare by flipping a well-worn trope on its head. From Single White Female to Ingrid Goes West, there’s no shortage of movies about lonely girls making trouble, but this film’s clever twists and shocking turns (particularly after the title sequence) left IMDb fans calling it the most underrated horror movie of the year.",
+    "release": "June 28, 2017",
+    "director": "Jon Watss",
+    "duration": "2 hours 13 minutes ",
+    "cast": ["tom holland", "michael keaton", "robert downey jr"],
+    "genres": ["horror", "mystery", "thriller"],
+    "isShowing": true,
+    "showingMonth": "oct"
+  },
+  {
+    "poster": "https://m.media-amazon.com/images/M/MV5BZDQxZTY0ZDItY2Y0Yy00OTIzLTkwYTgtNmNkODhiYTk4MzUwXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+    "title": "Infinity Pool",
+    "desc": "James and Em Foster are enjoying an all-inclusive beach vacation in the fictional island of La Tolqa, when a fatal accident exposes the resort's perverse subculture of hedonistic tourism, reckless violence and surreal horrors.",
+    "release": "June 28, 2017",
+    "director": "Jon Watss",
+    "duration": "2 hours 13 minutes ",
+    "cast": ["tom holland", "michael keaton", "robert downey jr"],
+    "genres": ["crime", "horror", "mystery"],
+    "isShowing": true,
+    "showingMonth": "oct"
+  },
+  {
+    "poster": "https://dx35vtwkllhj9.cloudfront.net/universalstudios/the-last-voyage-of-the-demeter/images/regions/us/onesheet.jpg",
+    "title": "The Last Voyage of the Demeter",
+    "desc": "It took seven years for Irish novelist Bram Stoker to write his seminal classic \"Dracula.\" But would you believe it took Hollywood three times that long to bring The Last Voyage of the Demeter to the screen? Good things seem to come to those who wait, and fans of period horror stories were rewarded when the film finally sailed into theaters this summer. Crafted from a single chapter of the landmark novel, the movie earned high marks from viewers who longed to see an adaptation indulge in the monstrous side of the Transylvanian terror.",
+    "release": "June 28, 2017",
+    "director": "Jon Watss",
+    "duration": "2 hours 13 minutes ",
+    "cast": ["tom holland", "michael keaton", "robert downey jr"],
+    "genres": ["fantasy", "horror"],
+    "isShowing": true,
+    "showingMonth": "oct"
+  },
+  {
+    "poster": "https://www.themoviedb.org/t/p/original/jFC4LS5qTAT3PinzdEzINfu1CV9.jpg",
+    "title": "The Pope's Exorcist",
+    "desc": "Follow Gabriele Amorth, the Vatican's leading exorcist, as he investigates the possession of a child and uncovers a conspiracy the Vatican has tried to keep secret.",
+    "release": "June 28, 2017",
+    "director": "Jon Watss",
+    "duration": "2 hours 13 minutes ",
+    "cast": ["tom holland", "michael keaton", "robert downey jr"],
+    "genres": ["horror", "thriller"],
+    "isShowing": true,
+    "showingMonth": "oct"
+  },
+  {
+    "poster": "https://m.media-amazon.com/images/M/MV5BMmY5ZGE4NmUtZWI4OS00ZWJmLWFjMzgtOWUyZjI4NDg3Y2E5XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+    "title": "Talk to Me",
+    "desc": "When a group of friends discover how to conjure spirits using an embalmed hand, they become hooked on the new thrill, until one of them goes too far and unleashes terrifying supernatural forces.",
+    "release": "June 28, 2017",
+    "director": "Jon Watss",
+    "duration": "2 hours 13 minutes ",
+    "cast": ["tom holland", "michael keaton", "robert downey jr"],
+    "genres": ["horror", "thriller"],
+    "isShowing": true,
+    "showingMonth": "oct"
+  },
+  {
+    "poster": "/images/poster/Rectangle 119-1.jpg",
+    "title": "Lion King",
+    "genres": ["Adventure", "Action", "Family"],
+    "desc": "After the murder of his father, a young lion prince flees his kingdom only to learn the true meaning of responsibility and bravery.",
+    "release": "June 28, 2017",
+    "director": "Jon Watss",
+    "duration": "2 hours 13 minutes ",
+    "cast": ["tom holland", "michael keaton", "robert downey jr"],
+    "isShowing": false,
+    "showingMonth": "nov"
+  },
+  {
+    "poster": "/images/poster/Rectangle 119-2.jpg",
+    "title": "The Witches",
+    "genres": ["Adventure", "Comedy", "Family"],
+    "desc": "A young boy and his grandmother have a run-in with a coven of witches and their leader.",
+    "release": "June 28, 2017",
+    "director": "Jon Watss",
+    "duration": "2 hours 13 minutes ",
+    "cast": ["tom holland", "michael keaton", "robert downey jr"],
+    "isShowing": false,
+    "showingMonth": "nov"
+  },
+  {
+    "poster": "/images/poster/Rectangle 119-3.jpg",
+    "title": "John Wick: Chapter 3 - Parabellum",
+    "genres": ["Action", "Crime", "Thriller"],
+    "desc": "John Wick is on the run after killing a member of the international assassins' guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.",
+    "release": "June 28, 2017",
+    "director": "Jon Watss",
+    "duration": "2 hours 13 minutes ",
+    "cast": ["tom holland", "michael keaton", "robert downey jr"],
+    "isShowing": false,
+    "showingMonth": "dec"
+  },
+  {
+    "poster": "/images/poster/Rectangle 119.jpg",
+    "title": "Spider-Man: Homecoming",
+    "genres": ["Action", "Adventure", "Sci-Fi"],
+    "desc": "Peter Parker balances his life as an ordinary high school student in Queens with his superhero alter-ego Spider-Man, and finds himself on the trail of a new menace prowling the skies of New York City.",
+    "release": "June 28, 2017",
+    "director": "Jon Watss",
+    "duration": "2 hours 13 minutes ",
+    "cast": ["tom holland", "michael keaton", "robert downey jr"],
+    "isShowing": false,
+    "showingMonth": "dec"
+  },
+  {
+    "poster": "/images/poster/Rectangle 139.jpg",
+    "title": "Black Widow",
+    "genres": ["Adventure", "Action", "Family"],
+    "desc": "Natasha Romanoff confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises.",
+    "release": "June 28, 2017",
+    "director": "Jon Watss",
+    "duration": "2 hours 13 minutes ",
+    "cast": ["tom holland", "michael keaton", "robert downey jr"],
+    "isShowing": false,
+    "showingMonth": "oct"
+  }
+]
