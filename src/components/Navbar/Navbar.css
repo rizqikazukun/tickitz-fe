@@ -26,9 +26,6 @@ nav {
 #signin-button {
     color: var(--tic-branding-color-middle);
     border-color: var(--tic-branding-color-middle);
-    /* i thing it's will broke in some devices */
-    margin-right: 5px;
-
 }
 
 #signin-button:hover {
@@ -85,7 +82,10 @@ nav {
     opacity: 100%;
     backdrop-filter: blur(10px) brightness(0.5);
   }
-  
+    
+.mobile-component {
+  display: none;
+}
     
   /* end of Offcanvas */
 

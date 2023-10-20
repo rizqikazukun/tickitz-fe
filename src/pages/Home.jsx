@@ -4,8 +4,90 @@ import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer/Footer'
 import '../styles/Home.css'
 import '../styles/Home.mobile.css'
+import axios from 'axios'
 
 function Home() {
+
+	const [movies, setMovie] = React.useState([])
+
+	React.useEffect(() => {
+
+		axios({ method: 'get', url: 'http://localhost:3000/api/movies.json' })
+			.then(res => {
+				if (res.status === 200) {
+					setMovie(res.data)
+				}
+			}).catch(err => console.log(err))
+
+		// const movies = document.getElementsByClassName('movie-scroll')
+		// console.log(movies)
+		// https://codepen.io/LCweb/pen/YZGVRg?editors=0010
+
+		touchScroll('now-showing-movie-scroll')
+		touchScroll('upcoming-movies-scroll')
+		touchScroll('months-scroll')
+
+		function touchScroll(nameIdAttribute) {
+			const slider = document.getElementById(nameIdAttribute)
+			let isDown = false
+			let startX
+			let scrollLeft
+
+			slider.addEventListener('mousedown', (e) => {
+				isDown = true
+				slider.classList.add('active')
+				startX = e.pageX - slider.offsetLeft
+				scrollLeft = slider.scrollLeft
+				cancelMomentumTracking()
+			})
+
+			slider.addEventListener('mouseleave', () => {
+				isDown = false
+				slider.classList.remove('active')
+			})
+
+			slider.addEventListener('mouseup', () => {
+				isDown = false
+				slider.classList.remove('active')
+				beginMomentumTracking()
+			})
+
+			slider.addEventListener('mousemove', (e) => {
+				if (!isDown) return
+				e.preventDefault()
+				const x = e.pageX - slider.offsetLeft
+				const walk = (x - startX) * 3 //scroll-fast
+				var prevScrollLeft = slider.scrollLeft
+				slider.scrollLeft = scrollLeft - walk
+				velX = slider.scrollLeft - prevScrollLeft
+			})
+
+			slider.addEventListener('wheel', (e) => {
+				cancelMomentumTracking()
+			})
+
+			// Detecting animation
+			var velX = 0
+			var momentumID
+
+			const beginMomentumTracking = () => {
+				cancelMomentumTracking()
+				momentumID = requestAnimationFrame(momentumLoop)
+			}
+			const cancelMomentumTracking = () => {
+				cancelAnimationFrame(momentumID)
+			}
+			const momentumLoop = () => {
+				slider.scrollLeft += velX
+				velX *= 0.95
+				if (Math.abs(velX) > 0.5) {
+					momentumID = requestAnimationFrame(momentumLoop)
+				}
+			}
+		}
+	}, [])
+
+	// console.log(movies)
 
 	const months = [
 		'January', 'February',
@@ -23,22 +105,11 @@ function Home() {
 	return (
 		<div className="AppHome">
 
-			<div className="container">
-				<Navbar />
-			</div>
+
+			<Navbar />
+
 
 			<header className="container">
-				{/* <!-- Bootstrap Canvas --> */}
-				<div className="offcanvas offcanvas-top shadow text-center" tabIndex="-1" id="offcanvasTop">
-					<div className="offcanvas-body">
-						<button className="btn dropdown-item canvasItem">Home</button>
-						<button className="btn dropdown-item canvasItem">List Movie</button>
-						<button className="btn dropdown-item canvasItem">Login</button>
-						<button className="btn dropdown-item canvasItem">Register</button>
-						<button className="btn dropdown-item canvasItem" data-bs-dismiss="offcanvas">Close</button>
-					</div>
-				</div>
-				{/* <!-- end of Bootstrap Canvas --> */}
 
 				{/* <!-- section --> */}
 				<section className="row text-center">
@@ -68,11 +139,15 @@ function Home() {
 						</div>
 					</div>
 					<div id="now-showing-movie-scroll" className="container movie-scroll text-center">
-						< MovieCard />
-						< MovieCard />
-						< MovieCard />
-						< MovieCard />
-						< MovieCard />
+						{
+							movies
+								.filter(movie => movie.isShowing === true)
+								.slice(0, 5)
+								.map((movie) => {
+									return < MovieCard poster={movie.poster} title={movie.tittle} genres={movie.genres} />
+								})
+						}
+
 					</div>
 				</section>
 				{/* <!-- end of now showing section --> */}
@@ -127,7 +202,7 @@ function Home() {
 				</section>
 				{/* <!-- end of call-to-action movies section --> */}
 
-				<Footer></Footer>
+				<Footer />
 
 			</main>
 
