@@ -1,8 +1,9 @@
 import React from 'react'
-import './Home.css'
 import MovieCard from '../components/MovieCard/MovieCard'
 import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer/Footer'
+import '../styles/Home.css'
+import '../styles/Home.mobile.css'
 
 function Home() {
 
