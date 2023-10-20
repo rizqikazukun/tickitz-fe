@@ -1,4 +1,5 @@
 import React from 'react'
+import { Player } from '@lottiefiles/react-lottie-player'
 import MovieCard from '../components/MovieCard/MovieCard'
 import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer/Footer'
@@ -12,12 +13,15 @@ function Home() {
 
 	React.useEffect(() => {
 
-		axios({ method: 'get', url: 'http://localhost:3000/api/movies.json' })
-			.then(res => {
-				if (res.status === 200) {
-					setMovie(res.data)
-				}
-			}).catch(err => console.log(err))
+		setTimeout(() => {
+			axios({ method: 'get', url: 'http://localhost:3000/api/movies.json' })
+				.then(res => {
+					if (res.status === 200) {
+						setMovie(res.data)
+					}
+				}).catch(err => console.log(err))
+		},
+		2500)
 
 		// const movies = document.getElementsByClassName('movie-scroll')
 		// console.log(movies)
@@ -139,15 +143,17 @@ function Home() {
 						</div>
 					</div>
 					<div id="now-showing-movie-scroll" className="container movie-scroll text-center">
-						{
+						{movies.length === 0 ? 
+							<div className='m-auto'>
+								<Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
+							</div> :
 							movies
 								.filter(movie => movie.isShowing === true)
 								.slice(0, 5)
-								.map((movie) => {
-									return < MovieCard poster={movie.poster} title={movie.tittle} genres={movie.genres} />
+								.map((movie, key) => {
+									return < MovieCard key={key} poster={movie.poster} title={movie.tittle} genres={movie.genres} />
 								})
 						}
-
 					</div>
 				</section>
 				{/* <!-- end of now showing section --> */}
@@ -170,11 +176,17 @@ function Home() {
 					</div>
 
 					<div id="upcoming-movies-scroll" className="container movie-scroll text-center">
-						< MovieCard />
-						< MovieCard />
-						< MovieCard />
-						< MovieCard />
-						< MovieCard />
+						{movies.length === 0 ? 
+							<div className='m-auto'>
+								<Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
+							</div> :
+							movies
+								.filter(movie => movie.isShowing === true)
+								.slice(0, 5)
+								.map((movie, key) => {
+									return < MovieCard key={key} poster={movie.poster} title={movie.tittle} genres={movie.genres} />
+								})
+						}
 					</div>
 				</section>
 				{/* <!-- end of upcoming movies section --> */}
