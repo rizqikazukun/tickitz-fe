@@ -1,5 +1,5 @@
 import Home from '../pages/Home'
-import Detail from '../pages/Detail'
+import MovieDetail from '../pages/MovieDetail'
 import { createBrowserRouter } from 'react-router-dom'
 
 const router = createBrowserRouter([
@@ -9,7 +9,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '/detail/:slug',
-		element: <Detail/>
+		element: <MovieDetail/>
 	}
 ])
 

@@ -108,13 +108,8 @@ function Home() {
 
 	return (
 		<div className="AppHome">
-
-
 			<Navbar />
-
-
 			<header className="container">
-
 				{/* <!-- section --> */}
 				<section className="row text-center">
 					<div id="header-left-section" className="col-md-6 col-12 align-self-center">
