@@ -17,9 +17,11 @@
   }
   
   .movie-scroll-card {
+    margin: 0 auto;
     flex-grow: 1;
-    width: 32vh;
-    min-width: 24vh;
+    width: 240px;
+    max-width: 240px;
+    min-width: 240px;
     padding: 20px;
     background-color: transparent;
   }
@@ -38,12 +40,9 @@
   }
   
   .movie-scroll-card-img {
-    width: 100%;
-    height: 32vh;
-  
+    aspect-ratio: 3/5;
     object-fit: cover;
     object-position: top;
-    text-align: center;
     border-radius: 5px;
   }
   
