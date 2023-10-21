@@ -2,6 +2,7 @@
 /* months scroll component */
 
 .months-scroll {
+  align-items: center;
   padding: 25px;
   display: flex;
   flex-direction: row;
@@ -22,13 +23,16 @@
 }
 
 .months-scroll-item-selected {
+  order: -1;
   flex-grow: 1;
   min-width: 125px;
+  height: 53px;
+  font-weight: 900;
   color: white;
-  background-color: var(--tic-branding-color-middle);
+  background-image: var(--tic-branding-gradient);
+  border: unset;
   border: 1px solid;
   border-radius: 6px;
-  border-color: var(--tic-branding-color-middle);
 }
 
 .months-scroll-item:hover {

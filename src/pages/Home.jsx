@@ -184,6 +184,7 @@ function Home() {
 							onClick={(e)=>{
 								e.preventDefault()
 								setMonth(monthName.toLowerCase())
+								document.getElementById('months-scroll').scrollLeft = 0
 							}}>
 								{monthName}
 							</button>))}
