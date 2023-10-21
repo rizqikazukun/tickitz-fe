@@ -193,14 +193,21 @@ function Home() {
 						{movies.length === 0 ? 
 							<div className='m-auto'>
 								<Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
-							</div> :
-							movies
+							</div> : movies 
 								.filter(movie => movie.showingMonth === selectedMonth )
 								.filter(movie => movie.isShowing === false )
 								.slice(0, 5)
-								.map((movie, key) => {
-									return < MovieCard key={key} poster={movie.poster} title={movie.tittle} genres={movie.genres} />
-								})
+								.length !== 0 ?
+								movies 
+									.filter(movie => movie.showingMonth === selectedMonth )
+									.filter(movie => movie.isShowing === false )
+									.slice(0, 5)
+									.map((movie, key) => {
+										return < MovieCard key={key} poster={movie.poster} title={movie.tittle} genres={movie.genres} />
+									}) :
+								<div className='m-auto'>
+									<Player autoplay loop src="/lottie/movie-card-404.json" style={{ height: '300px', width: '300px' }} />
+								</div>
 						}
 					</div>
 				</section>
