@@ -15,6 +15,10 @@ const MovieDetail = () => {
 	const [movies, setMovie] = React.useState([])
 
 	React.useEffect(() => {
+		
+		
+		window.scrollTo(0, 0)
+		
 		setTimeout(() => {
 			axios({ method: 'get', url: 'http://localhost:3000/api/movies.json' })
 				.then(res => {

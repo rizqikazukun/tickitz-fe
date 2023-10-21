@@ -14,6 +14,8 @@ function Home() {
 	
 	React.useEffect(() => {
 
+		window.scrollTo(0, 0)
+
 		const date = new Date()
 		const currentMonth = date.toLocaleString('default', { month: 'long' }).toLowerCase()
 		setMonth(currentMonth)
@@ -27,7 +29,7 @@ function Home() {
 					}
 				}).catch(err => console.log(err))
 		},
-		2500)
+		1700)
 
 		// const movies = document.getElementsByClassName('movie-scroll')
 		// console.log(movies)
