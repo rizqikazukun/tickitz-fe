@@ -6,7 +6,7 @@ export default function Navbar() {
 	return (
 		<div id='navbar'>
 			{/* <!-- nav link --> */}
-			<nav className="container d-flex justify-content-between my-5">
+			<nav className="container d-flex justify-content-between">
 				<div id="nav-left-item" className="gap-4">
 					<a href="/#"><img src="/assets/img/logo.svg" alt="logo" height="64px" /></a>
 					<a className="desktop-component" href="/#">Home</a>

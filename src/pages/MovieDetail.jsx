@@ -6,6 +6,7 @@ import Footer from '../components/Footer/Footer'
 import axios from 'axios'
 import { Player } from '@lottiefiles/react-lottie-player'
 import '../styles/MovieDetail.css'
+import '../styles/MovieDetail.mobile.css'
 
 
 const MovieDetail = () => {
@@ -33,7 +34,7 @@ const MovieDetail = () => {
 	return (
 		<div id='Page-Movie-Detail'>
 			<Navbar />
-			<div className='container p-5'>
+			<div id='detail-movie' className='container'>
 				{movies.length === 0 ?
 					<div className='m-auto'>
 						<Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
@@ -56,7 +57,7 @@ const MovieDetail = () => {
 										<div className="col-md-4 poster-container" >
 											<img src={movie.poster} alt="poster" />
 										</div>
-										<div className="col-md-8 row" style={{ paddingLeft: '3vw' }}>
+										<div className="col-md-8 row m-auto" style={{ paddingLeft: '3vw' }}>
 											<div className=' col-md-12 col-xs-12'>
 												<h1>{movie.tittle}</h1>
 												<p><span className="content">{movie.genres.join(', ')}</span></p>
@@ -111,7 +112,7 @@ const MovieDetail = () => {
 											</div>
 											<div className=' col-md-12 col-xs-12'>
 												<h5>Synopsis</h5>
-												<p><span className="content">{movie.desc}</span></p>
+												<p><span className="content" style={{color: 'var(--tic-color-muted)'}}>{movie.desc}</span></p>
 											</div>
 										</div>
 									</div>

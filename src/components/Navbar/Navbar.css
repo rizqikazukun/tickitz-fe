@@ -2,6 +2,8 @@
 
 nav {
     align-items: center;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
 }
 
 #nav-left-item a {

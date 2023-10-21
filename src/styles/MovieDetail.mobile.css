@@ -1,0 +1,12 @@
+@media (max-width: 768px) {
+    .poster-container {
+        margin-top: -40px !important;
+        border: unset !important;
+    }
+    
+     #detail-movie {
+        text-align: center;
+        padding-top: unset ;
+    }
+    
+}
