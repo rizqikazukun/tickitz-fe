@@ -10,8 +10,14 @@ import axios from 'axios'
 function Home() {
 
 	const [movies, setMovie] = React.useState([])
-
+	const [selectedMonth, setMonth] = React.useState('')
+	
 	React.useEffect(() => {
+
+		const date = new Date()
+		const currentMonth = date.toLocaleString('default', { month: 'long' }).toLowerCase()
+		setMonth(currentMonth)
+		// console.log(selectedMonth)
 
 		setTimeout(() => {
 			axios({ method: 'get', url: 'http://localhost:3000/api/movies.json' })
@@ -94,8 +100,9 @@ function Home() {
 	// console.log(movies)
 
 	const months = [
-		'January', 'February',
-		'march',
+		'January', 
+		'February',
+		'March',
 		'April',
 		'May',
 		'June',
@@ -167,7 +174,19 @@ function Home() {
 						</div></div>
 
 					<div id="months-scroll" className="container months-scroll text-center">
-						{months.map(monthName => (<button key={monthName} type="button" className="btn months-scroll-item">{monthName}</button>))}
+						{months.map(monthName => (
+							<button key={monthName} type="button" className={
+								monthName.toLowerCase() === selectedMonth ?
+									'months-scroll-item-selected' :
+									'months-scroll-item'
+							} 
+							
+							onClick={(e)=>{
+								e.preventDefault()
+								setMonth(monthName.toLowerCase())
+							}}>
+								{monthName}
+							</button>))}
 					</div>
 
 					<div id="upcoming-movies-scroll" className="container movie-scroll text-center">
@@ -176,7 +195,8 @@ function Home() {
 								<Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
 							</div> :
 							movies
-								.filter(movie => movie.isShowing === true)
+								.filter(movie => movie.showingMonth === selectedMonth )
+								.filter(movie => movie.isShowing === false )
 								.slice(0, 5)
 								.map((movie, key) => {
 									return < MovieCard key={key} poster={movie.poster} title={movie.tittle} genres={movie.genres} />

@@ -13,8 +13,21 @@
 .months-scroll-item {
   flex-grow: 1;
   min-width: 125px;
+  height: 36px;
   color: var(--tic-branding-color-middle);
   background-color: transparent;
+  border: 1px solid;
+  border-radius: 6px;
+  border-color: var(--tic-branding-color-middle);
+}
+
+.months-scroll-item-selected {
+  flex-grow: 1;
+  min-width: 125px;
+  color: white;
+  background-color: var(--tic-branding-color-middle);
+  border: 1px solid;
+  border-radius: 6px;
   border-color: var(--tic-branding-color-middle);
 }
 

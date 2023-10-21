@@ -548,7 +548,7 @@
     "duration": "1h 37m",
     "cast": ["Fajar Nugra", "Yasamin Jasem", "Arla Ailani"],
     "genres": ["horror", "mystery"],
-    "isShowing": true,
+    "isShowing": false,
     "showingMonth": "october"
   },
   {
