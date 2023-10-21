@@ -1,20 +1,17 @@
 import React from 'react'
 import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer/Footer'
-import { Player } from '@lottiefiles/react-lottie-player'
+import Error404 from '../components/Error404/Error404'
 
-export default function Error404() {
 
-    
+export default function ErrorPage404() {
 	return (
 		<div className='Error404'>
 			<Navbar/>
-
-			<Player autoplay loop src="/lottie/404.json" style={{ width: '100%' }} />
-            
-
+			<div className='container'>
+				<Error404/>
+			</div>
 			<Footer/>
-        
 		</div>
 	)
 }

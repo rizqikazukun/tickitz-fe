@@ -1,4 +1,4 @@
-import Error404 from '../pages/Error404'
+import ErrorPage404 from '../pages/ErrorPage404'
 import Home from '../pages/Home'
 import MovieDetail from '../pages/MovieDetail'
 import { createBrowserRouter } from 'react-router-dom'
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '*',
-		element: <Error404/>
+		element: <ErrorPage404/>
 	}
 ])
 
