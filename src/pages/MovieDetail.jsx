@@ -59,7 +59,7 @@ const MovieDetail = () => {
 										<div className="col-md-8 row" style={{ paddingLeft: '3vw' }}>
 											<div className=' col-md-12 col-xs-12'>
 												<h1>{movie.tittle}</h1>
-												<p><span className="content">{movie.genres}</span></p>
+												<p><span className="content">{movie.genres.join(', ')}</span></p>
 											</div>
 											<div className=" col-md-4 col-xs-12" >
 												<div>
@@ -104,7 +104,7 @@ const MovieDetail = () => {
 													</p>
 													<p>
 														<span className="content">
-															{movie.cast}
+															{movie.cast.join(', ')}
 														</span>
 													</p>
 												</div>

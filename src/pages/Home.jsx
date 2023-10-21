@@ -155,7 +155,7 @@ function Home() {
 								.filter(movie => movie.isShowing === true)
 								.slice(0, 5)
 								.map((movie, key) => {
-									return < MovieCard key={key} poster={movie.poster} title={movie.tittle} genres={movie.genres} />
+									return < MovieCard key={key} poster={movie.poster} title={movie.tittle} genres={movie.genres.join(', ')} />
 								})
 						}
 					</div>
@@ -206,7 +206,7 @@ function Home() {
 									.filter(movie => movie.isShowing === false )
 									.slice(0, 5)
 									.map((movie, key) => {
-										return < MovieCard key={key} poster={movie.poster} title={movie.tittle} genres={movie.genres} />
+										return < MovieCard key={key} poster={movie.poster} title={movie.tittle} genres={movie.genres.join(', ')} />
 									}) :
 								<div className='m-auto'>
 									<Player autoplay loop src="/lottie/movie-card-404.json" style={{ height: '300px', width: '300px' }} />
