@@ -27,5 +27,6 @@ serve -s build
 
 **Pages** | **URI** | **Slug**
 --------------|:-------:|:--------:
-Home          |    /    |  no
-Detail        | /detail | yes
+Home          |    /    | no
+MovieDetail   | /detail | yes
+ErrorPage404  |   /*    | no
