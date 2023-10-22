@@ -38,8 +38,9 @@ const MovieDetail = () => {
 				{movies.length === 0 ?
 					<div className='m-auto'>
 						<Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
-					</div> : movies
-						.filter(movie => String(movie.tittle)
+					</div> : 
+					movies
+						.filter(movie => String(movie.title)
 							.toLowerCase()
 							.split(' ')
 							.join('-') === slug).length === 0 ?
@@ -47,19 +48,19 @@ const MovieDetail = () => {
 							<Player autoplay loop src="/lottie/404.json" />
 						</div> :
 						movies
-							.filter(movie => String(movie.tittle)
+							.filter(movie => String(movie.title)
 								.toLowerCase()
 								.split(' ')
 								.join('-') === slug)
 							.map((movie, key) => {
 								return (
-									<div className='row'>
+									<div key={key} className='row'>
 										<div className="col-md-4 poster-container" >
 											<img src={movie.poster} alt="poster" />
 										</div>
 										<div className="col-md-8 row m-auto" style={{ paddingLeft: '3vw' }}>
 											<div className=' col-md-12 col-xs-12'>
-												<h1>{movie.tittle}</h1>
+												<h1>{movie.title}</h1>
 												<p><span className="content">{movie.genres.join(', ')}</span></p>
 											</div>
 											<div className=" col-md-4 col-xs-12" >
