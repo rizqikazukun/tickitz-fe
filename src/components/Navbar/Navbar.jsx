@@ -1,6 +1,8 @@
 import React from 'react'
 import './Navbar.css'
 import './Navbar.mobile.css'
+import { Link } from 'react-router-dom'
+
 
 export default function Navbar() {
 	return (
@@ -16,9 +18,9 @@ export default function Navbar() {
 					<button id="signin-button" type="button" className="desktop-component btn mx-1" style={{ width: '120px' }}>
                         Login
 					</button>
-					<button id="signup-button" type="button" className="desktop-component btn mx-1" style={{ width: '120px' }}>
+					<Link to="/register"><button id="signup-button" type="button" className="desktop-component btn mx-1" style={{ width: '120px' }}>
                         Register
-					</button>
+					</button></Link>
 					{/* <!-- Burger Icon --> */}
 					<button className="mobile-component btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop">
 						<img className="svg-color-tickitz-branding" src="/assets/img/icons/Hamburger_icon.svg" alt="menu" height="54px" />
