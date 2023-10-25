@@ -155,7 +155,8 @@ function Home() {
 								.filter(movie => movie.isShowing === true)
 								.slice(0, 5)
 								.map((movie, key) => {
-									return < MovieCard key={key} poster={movie.poster} title={movie.title} genres={movie.genres.join(', ')} />
+									return < MovieCard key={key} poster={movie.poster} title={movie.title} genres={movie.genres.join(', ')} 
+										slug={movie.slug} />
 								})
 						}
 					</div>
@@ -197,16 +198,17 @@ function Home() {
 							<div className='m-auto'>
 								<Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
 							</div> : movies 
-								.filter(movie => movie.showingMonth === selectedMonth )
+								.filter(movie => movie.showingMonth === String(selectedMonth).slice(0,3).toLowerCase() )
 								.filter(movie => movie.isShowing === false )
 								.slice(0, 5)
 								.length !== 0 ?
 								movies 
-									.filter(movie => movie.showingMonth === selectedMonth )
+									.filter(movie => movie.showingMonth === String(selectedMonth).slice(0,3).toLowerCase() )
 									.filter(movie => movie.isShowing === false )
 									.slice(0, 5)
 									.map((movie, key) => {
-										return < MovieCard key={key} poster={movie.poster} title={movie.title} genres={movie.genres.join(', ')} />
+										return < MovieCard key={key} poster={movie.poster} title={movie.title} genres={movie.genres.join(', ')} 
+											slug={movie.slug} />
 									}) :
 								<div className='m-auto'>
 									<Player autoplay loop src="/lottie/movie-card-404.json" style={{ height: '300px', width: '300px' }} />
