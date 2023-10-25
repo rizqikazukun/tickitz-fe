@@ -25,6 +25,11 @@ body {
 
   /* Firefox 64 */ 
   scrollbar-width: none; 
+
+
+  /* This is fix for Error Occured by Offcanvas  */
+  overflow-y: unset !important;
+  padding-right: unset !important;
 }
 
 body a {

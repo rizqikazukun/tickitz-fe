@@ -10,17 +10,27 @@ export default function Navbar() {
 			{/* <!-- nav link --> */}
 			<nav className="container d-flex justify-content-between">
 				<div id="nav-left-item" className="gap-4">
-					<a href="/#"><img src="/assets/img/logo.svg" alt="logo" height="64px" /></a>
-					<a className="desktop-component" href="/#">Home</a>
-					<a className="desktop-component" href="/#">List Movie</a>
+					<div style={{height:'36px'}}>
+						<Link to='/'><img src="/assets/img/logo.svg" alt="logo" style={{height: '100%'}}/></Link>
+					</div>
+					<div className="desktop-component">
+						<Link to='/'>Home</Link>
+					</div>
+					<div className="desktop-component">
+						<Link to='/list-movie'>Movie List</Link>
+					</div>
 				</div>
 				<div id="nav-right-item">
-					<button id="signin-button" type="button" className="desktop-component btn mx-1" style={{ width: '120px' }}>
+					
+					<Link to="/login">
+						<button id="signin-button" type="button" className="desktop-component btn mx-1" style={{ width: '120px' }}>
                         Login
-					</button>
+						</button>
+					</Link>
 					<Link to="/register"><button id="signup-button" type="button" className="desktop-component btn mx-1" style={{ width: '120px' }}>
                         Register
-					</button></Link>
+					</button>
+					</Link>
 					{/* <!-- Burger Icon --> */}
 					<button className="mobile-component btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop">
 						<img className="svg-color-tickitz-branding" src="/assets/img/icons/Hamburger_icon.svg" alt="menu" height="54px" />
@@ -32,11 +42,31 @@ export default function Navbar() {
 			{/* <!-- Bootstrap Canvas --> */}
 			<div className="offcanvas offcanvas-top shadow text-center" tabIndex="-1" id="offcanvasTop">
 				<div className="offcanvas-body">
-					<button className="btn dropdown-item canvasItem">Home</button>
-					<button className="btn dropdown-item canvasItem">List Movie</button>
-					<button className="btn dropdown-item canvasItem">Login</button>
-					<button className="btn dropdown-item canvasItem">Register</button>
-					<button className="btn dropdown-item canvasItem" data-bs-dismiss="offcanvas">Close</button>
+					<Link to='/'>
+						<div className='canvasItem'>
+							Home	
+						</div>
+					</Link>
+					<Link to='/list-movie'>
+						<div className='canvasItem'>
+							List Movie	
+						</div>
+					</Link>
+					<Link to='/login'>
+						<div className='canvasItem'>
+							Login	
+						</div>
+					</Link>
+					<Link to='/register'>
+						<div className='canvasItem'>
+							Register	
+						</div>
+					</Link>
+
+					
+					<div  className='canvasItem' data-bs-dismiss="offcanvas">
+						Close
+					</div>
 				</div>
 			</div>
 			{/* <!-- end of Bootstrap Canvas --> */}
