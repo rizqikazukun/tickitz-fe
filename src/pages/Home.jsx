@@ -11,25 +11,59 @@ function Home() {
 
 	const [movies, setMovie] = React.useState([])
 	const [selectedMonth, setMonth] = React.useState('')
-	
+	const [upcoming, setUpcoming ] = React.useState([])
+	const [mvErr, setMvErr] = React.useState([])
+
+	const months = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December']
+
+	const initPage = async (isMovies, isUpcoming) => {
+		try {
+			if (isMovies.length === 0 && isUpcoming.length === 0) {
+				const monthIndex = new Date().getMonth()
+				const currentMonth = months[monthIndex].slice(0,3).toLocaleLowerCase()
+				setMonth(currentMonth)
+
+				const nowShowingMovies = await axios({ method: 'get', url: 'https://tickitz-be.onrender.com/rizqi/movie/now-showing' })
+				const upcomingMoviesByMonth = await axios({ method: 'get', url: `https://tickitz-be.onrender.com/rizqi/movie/upcoming/${currentMonth}`})
+				setMovie(nowShowingMovies.data.data)
+				setUpcoming(upcomingMoviesByMonth.data.data)
+			}
+		}
+		catch (err) {
+			setMvErr(err)
+			console.log(err)
+		}
+	}
+
+	function upcomingMovieHandler (selectedMonth) {
+		const slug = selectedMonth
+		axios({ method: 'get', url: `https://tickitz-be.onrender.com/rizqi/movie/upcoming/${slug}`}).then( movies =>
+			setUpcoming(movies.data.data)
+		).catch(err => setMvErr(err))
+	}
+
+
 	React.useEffect(() => {
 
-		window.scrollTo(0, 0)
+		if (movies.length === 0) {
+			window.scrollTo(0, 0)
+		}
 
-		const date = new Date()
-		const currentMonth = date.toLocaleString('default', { month: 'long' }).toLowerCase()
-		setMonth(currentMonth)
-		// console.log(selectedMonth)
-
-		setTimeout(() => {
-			axios({ method: 'get', url: 'http://localhost:3000/api/movies.json' })
-				.then(res => {
-					if (res.status === 200) {
-						setMovie(res.data)
-					}
-				}).catch(err => console.log(err))
-		},
-		1700)
+		initPage(movies,upcoming)
+		upcomingMovieHandler(selectedMonth)
+		console.log(upcoming)
 
 		// const movies = document.getElementsByClassName('movie-scroll')
 		// console.log(movies)
@@ -97,23 +131,8 @@ function Home() {
 				}
 			}
 		}
-	}, [])
-
-	// console.log(movies)
-
-	const months = [
-		'January', 
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December']
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedMonth])
 
 	return (
 		<div className="AppHome">
@@ -147,15 +166,14 @@ function Home() {
 						</div>
 					</div>
 					<div id="now-showing-movie-scroll" className="container movie-scroll text-center">
-						{movies.length === 0 ? 
+						{movies.length === 0 ?
 							<div className='m-auto'>
 								<Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
 							</div> :
 							movies
-								.filter(movie => movie.isShowing === true)
 								.slice(0, 5)
 								.map((movie, key) => {
-									return < MovieCard key={key} poster={movie.poster} title={movie.title} genres={movie.genres.join(', ')} 
+									return < MovieCard key={key} poster={movie.poster} title={movie.title} genres={movie.genres.join(', ')}
 										slug={movie.slug} />
 								})
 						}
@@ -179,37 +197,30 @@ function Home() {
 					<div id="months-scroll" className="container months-scroll text-center">
 						{months.map(monthName => (
 							<button key={monthName} type="button" className={
-								monthName.toLowerCase() === selectedMonth ?
+								monthName.slice(0,3).toLowerCase() === selectedMonth ?
 									'months-scroll-item-selected' :
 									'months-scroll-item'
-							} 
-							
-							onClick={(e)=>{
-								e.preventDefault()
-								setMonth(monthName.toLowerCase())
-								document.getElementById('months-scroll').scrollLeft = 0
+							}
+
+							onClick={(e) => {
+								
+								document.getElementById('months-scroll')
+									.scrollLeft = 0
+								setMonth(monthName.slice(0,3).toLowerCase())
 							}}>
 								{monthName}
 							</button>))}
 					</div>
 
 					<div id="upcoming-movies-scroll" className="container movie-scroll text-center">
-						{movies.length === 0 ? 
+						{upcoming.length === 0 ?
 							<div className='m-auto'>
 								<Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
-							</div> : movies 
-								.filter(movie => movie.showingMonth === String(selectedMonth).slice(0,3).toLowerCase() )
-								.filter(movie => movie.isShowing === false )
-								.slice(0, 5)
-								.length !== 0 ?
-								movies 
-									.filter(movie => movie.showingMonth === String(selectedMonth).slice(0,3).toLowerCase() )
-									.filter(movie => movie.isShowing === false )
-									.slice(0, 5)
-									.map((movie, key) => {
-										return < MovieCard key={key} poster={movie.poster} title={movie.title} genres={movie.genres.join(', ')} 
-											slug={movie.slug} />
-									}) :
+							</div> : movies.length !== 0 ?
+								upcoming.slice(0, 5).map((movie, key) => {
+									return < MovieCard key={key} poster={movie.poster} title={movie.title} genres={movie.genres.join(', ')}
+										slug={movie.slug} />
+								}) :
 								<div className='m-auto'>
 									<Player autoplay loop src="/lottie/movie-card-404.json" style={{ height: '300px', width: '300px' }} />
 								</div>
