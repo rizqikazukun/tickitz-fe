@@ -6,21 +6,21 @@ import Register from '../pages/Register'
 
 
 const router = createBrowserRouter([
-	{
-		path: '/',
-		element: <Home />
-	},
-	{
-		path: '/detail/:slug',
-		element: <MovieDetail/>
-	},
-	{
-		path: '*',
-		element: <ErrorPage404/>
-	},{
-		path: '/register',
-		element: <Register/>
-	}
+    {
+        path: '/',
+        element: <Home />
+    },
+    {
+        path: '/detail/:slug',
+        element: <MovieDetail/>
+    },
+    {
+        path: '*',
+        element: <ErrorPage404/>
+    },{
+        path: '/register',
+        element: <Register/>
+    }
 ])
 
 export default router
