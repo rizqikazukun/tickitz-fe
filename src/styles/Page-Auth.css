@@ -1,0 +1,101 @@
+#left-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    background-size: cover;
+    background-color: #2b156be0;
+    background-image: url('../../public/assets/img/hero.png');
+    background-blend-mode: soft-light;
+}
+
+#left-item img {
+    max-width: 512px;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(181deg) brightness(102%) contrast(101%);
+}
+
+h1 {
+    color: #121212;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.144px;
+}
+
+#left-item p {
+    color: rgba(255, 255, 255, 0.80);
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.144px;
+}
+
+#button-login {
+    color: white;
+    background-image: var(--tic-branding-gradient);
+    border: unset;
+    height: 64px;
+
+    font-weight: 900;
+}
+
+#button-login:hover {
+    background-image: var(--tic-branding-gradient-hover);
+    border: unset;
+}
+
+#right-item {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 8%;
+    max-height: 100vh;
+}
+
+#right-item a {
+    color: var(--tic-branding-color-middle);
+}
+
+#right-item .form-lable {
+    color: #4E4B66;
+    font-family: Mulish;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+#right-item input[placeholder] {
+    color: #A0A3BD;
+    font-family: Mulish;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.75px;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .Page-Auth {
+        padding: 5%;
+        padding-top: 8vh;
+    }
+
+    #left-item {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 992px) {
+
+    #left-item img {
+        max-width: 90%;
+    }
+
+}

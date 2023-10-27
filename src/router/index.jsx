@@ -3,6 +3,8 @@ import Home from '../pages/Home'
 import MovieDetail from '../pages/MovieDetail'
 import { createBrowserRouter } from 'react-router-dom'
 import Register from '../pages/Register'
+import Login from '../pages/Login'
+
 
 
 const router = createBrowserRouter([
@@ -17,9 +19,14 @@ const router = createBrowserRouter([
     {
         path: '*',
         element: <ErrorPage404/>
-    },{
+    },
+    {
         path: '/register',
         element: <Register/>
+    },
+    {
+        path: '/login',
+        element: <Login/>
     }
 ])
 
