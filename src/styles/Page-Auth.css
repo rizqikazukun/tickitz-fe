@@ -97,6 +97,70 @@ h1 {
     letter-spacing: 0.75px;
 }
 
+div#Page-ForgotPassword div#Body-ForgotPassword div#left-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    padding: 6%;
+}
+
+div#Page-ForgotPassword div#Body-ForgotPassword div#left-item img {
+    max-width: 256px;
+    margin-bottom: 14vh;
+
+}
+
+div#Page-ForgotPassword div#Body-ForgotPassword div#left-item h1 {
+    color: #ffffff;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.144px;
+}
+
+
+div#Page-ForgotPassword div#Body-ForgotPassword div#left-item p {
+    color: rgba(255, 255, 255, 0.70);
+    font-family: Mulish;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.168px;
+}
+
+/* Dot Element */
+
+.dot-body {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 30px;
+}
+
+.dot-number {
+    border-radius: 50%; 
+    background-color: #fff; 
+    height: 50px; 
+    width: 50px;
+    text-align: center;
+    padding-top: 3%;
+}
+
+.dot-title {
+    color: var(--tic-branding-color-middle); 
+    font-weight: 900;
+}
+
+.dot-content {
+    color: #fff;
+}
+
+/* End of Dot Element */
+
 
 @media screen and (max-width: 768px) {
 
@@ -106,6 +170,11 @@ h1 {
     }
 
     #left-item {
+        display: none;
+    }
+
+
+    div#Page-ForgotPassword div#Body-ForgotPassword div#left-item {
         display: none;
     }
 }
