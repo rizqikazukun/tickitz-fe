@@ -6,6 +6,7 @@ import Footer from '../components/Footer/Footer'
 import '../styles/Home.css'
 import '../styles/Home.mobile.css'
 import axios from 'axios'
+import Joi from 'joi'
 
 function Home() {
 
@@ -14,6 +15,8 @@ function Home() {
     const [upcoming, setUpcoming ] = React.useState([])
     // eslint-disable-next-line no-unused-vars
     const [mvErr, setMvErr] = React.useState([])
+    const [ctaValue, setCtaValue] = React.useState('')
+    const [ctaValid, setCtaValid] = React.useState(false)
 
     const months = [
         'January',
@@ -67,6 +70,12 @@ function Home() {
                 setUpcoming(movies.data.data)
         ).catch(err => setMvErr(err))
     }
+
+    const validateCta = (e) => {
+        const ctaScheme = Joi.string().email({ tlds: { allow: false } })
+        ctaScheme.validateAsync(e.target.value).then(()=>setCtaValid(true)).catch(()=>setCtaValid(false))
+    }
+    
 
     React.useEffect(() => {
         if (movies.length === 0) {
@@ -143,7 +152,7 @@ function Home() {
             }
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedMonth])
+    }, [selectedMonth, ctaValid,ctaValue])
 
     return (
         <div className="AppHome">
@@ -251,10 +260,20 @@ function Home() {
                         <p style={{ marginBottom: '-5px' }}>Be the vanguard of the</p>
                         <h1>Moviegoers</h1>
                         <div id="subcription-email-input" className="d-flex justify-content-center gap-2 my-3 m-auto"
-                            style={{ height: 'fit-content', width: '80%' }}>
+                            style={{ height: 'fit-content', width: '80%' }}
+                            onChange={(e)=>{
+                                validateCta(e)
+                                setCtaValue(e.target.value)
+                            }}>
                             <input style={{ height: '53px', width: '38vh' }} type="email" className="form-control" id="input-email-form"
                                 placeholder="Type your email" />
-                            <button style={{ height: '53px', width: '14vh' }} id="input-email" className="btn form-control">Join Now</button>
+                            <button 
+                                style={{ height: '53px', width: '14vh' }} 
+                                id="input-email" 
+                                className="btn form-control" 
+                                disabled={!ctaValid ? true : false }>
+                                    Join Now
+                            </button>
                         </div>
                         <p style={{ fontSize: '14px' }}>
 							By joining you as a Tickitz member,<br />
