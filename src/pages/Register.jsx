@@ -1,12 +1,12 @@
 import React from 'react'
-import '../styles/Register.css'
+import '../styles/Page-Auth.css'
 import '../styles/App.css'
 import { Link } from 'react-router-dom'
 import '../styles/App.css'
 
 export default function Register() {
     return (
-        <div id='Page-Register'>
+        <div id='Page-Register' className='Page-Auth'>
             <div className='row m-auto'>
                 <div id='left-item' className='col-md-7'>
                     <img src='assets/img/logo.svg' alt="logo"/>

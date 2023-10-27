@@ -34,6 +34,8 @@ h1 {
     letter-spacing: 0.144px;
 }
 
+/* Button  */
+
 #button-login {
     color: white;
     background-image: var(--tic-branding-gradient);
@@ -47,6 +49,22 @@ h1 {
     background-image: var(--tic-branding-gradient-hover);
     border: unset;
 }
+
+#button-register {
+    color: white;
+    background-image: var(--tic-branding-gradient);
+    border: unset;
+    height: 64px;
+
+    font-weight: 900;
+}
+
+#button-register:hover {
+    background-image: var(--tic-branding-gradient-hover);
+    border: unset;
+}
+
+/* End of Button */
 
 #right-item {
     display: flex;
