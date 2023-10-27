@@ -8,50 +8,53 @@ import { Player } from '@lottiefiles/react-lottie-player'
 import '../styles/MovieDetail.css'
 import '../styles/MovieDetail.mobile.css'
 
-
 const MovieDetail = () => {
 
-
     const { slug } = useParams()
-    const [movies, setMovie] = React.useState([])
+    const [detailMovies, setDetailMovies] = React.useState([])
+    const [movieStatusCode, setMovieStatusCode ] = React.useState(0)
+
+    const handleInitPage = async () => {
+        try {
+            const detail = await axios({ 
+                method: 'get', 
+                url: `https://tickitz-be.onrender.com/rizqi/movie/detail/${slug}` 
+            })
+            setMovieStatusCode(detail.status)
+            setDetailMovies(detail.data.data)
+        } catch (error) {
+            setMovieStatusCode(error.response.status)
+        }
+    } 
 
     React.useEffect(() => {
-		
-		
-        window.scrollTo(0, 0)
-		
-        setTimeout(() => {
-            axios({ method: 'get', url: 'http://localhost:3000/api/movies.json' })
-                .then(res => {
-                    if (res.status === 200) {
-                        setMovie(res.data)
-                    }
-                }).catch(err => console.log(err))
-        },
-        1200)
-    }, [])
+
+        if (movieStatusCode === 0){
+            window.scrollTo(0, 0)
+        }
+
+        // i just want to show if the app 
+        // has no data on first load.
+        setTimeout(()=>{
+            handleInitPage()
+        }, 1200)
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [movieStatusCode])
 
     return (
         <div id='Page-Movie-Detail'>
             <Navbar />
             <div id='detail-movie' className='container'>
-                {movies.length === 0 ?
+                { movieStatusCode === 0 ?
                     <div className='m-auto'>
                         <Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
                     </div> : 
-                    movies
-                        .filter(movie => String(movie.title)
-                            .toLowerCase()
-                            .split(' ')
-                            .join('-') === slug).length === 0 ?
+                    movieStatusCode === 404 ?
                         <div className='m-auto'>
                             <Player autoplay loop src="/lottie/404.json" />
                         </div> :
-                        movies
-                            .filter(movie => String(movie.title)
-                                .toLowerCase()
-                                .split(' ')
-                                .join('-') === slug)
+                        detailMovies
                             .map((movie, key) => {
                                 return (
                                     <div key={key} className='row'>

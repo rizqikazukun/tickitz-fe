@@ -22,7 +22,6 @@
   },
   "eslintConfig": {
     "extends": [
-      "eslint:recommended",
       "react-app",
       "react-app/jest"
     ],
@@ -42,7 +41,8 @@
       ],
       "no-tabs": 0,
       "indent": "warn",
-      "react/react-in-jsx-scope": "off"
+      "react/react-in-jsx-scope": "off",
+      "no-console": "warn"
     }
   },
   "browserslist": {
