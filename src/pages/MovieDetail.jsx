@@ -44,7 +44,7 @@ const MovieDetail = () => {
 
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-        const monthIndex = new Date().getMonth()
+        const monthIndex = new Date(_date).getMonth()
         const dayIndex = new Date(_date).getDay()
         const dayName = days[dayIndex]
         const monthName = months[monthIndex]
