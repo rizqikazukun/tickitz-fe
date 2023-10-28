@@ -30,10 +30,14 @@ export default function Login() {
             setPageLoginState(true)
         }).catch(err =>{
             if (err.response.status === 422) {
-                setInputError(err?.response?.data?.messages)
+                setInputError(err.response.data.messages)
+            } 
+
+            if (err.response.status === 400) {
+                setAuthError(err.response.data.messages)
             } 
             
-            if (err?.response?.data?.messages === 'User not exist') {
+            if (err.response.data.messages === 'Wrong password') {
                 setAuthError(err.response.data.messages)
             }
             
