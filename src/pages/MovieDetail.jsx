@@ -7,49 +7,86 @@ import axios from 'axios'
 import { Player } from '@lottiefiles/react-lottie-player'
 import '../styles/MovieDetail.css'
 import '../styles/MovieDetail.mobile.css'
+import '../styles/App.css'
 
 const MovieDetail = () => {
 
     const { slug } = useParams()
     const [detailMovies, setDetailMovies] = React.useState([])
-    const [movieStatusCode, setMovieStatusCode ] = React.useState(0)
+    const [movieStatusCode, setMovieStatusCode] = React.useState(0)
+    const [cinemasList, setCinemasList] = React.useState([])
+    const [date, setDate] = React.useState('')
+    const [time, setTime] = React.useState('')
+    const [isLoading, setIsLoading] = React.useState(false)
 
     const handleInitPage = async () => {
         try {
-            const detail = await axios({ 
-                method: 'get', 
-                url: `https://tickitz-be.onrender.com/rizqi/movie/detail/${slug}` 
+            const detail = await axios({
+                method: 'get',
+                url: `https://tickitz-be.onrender.com/rizqi/movie/detail/${slug}`
             })
+
+            const cinemas = await axios({
+                method: 'get',
+                url: `https://tickitz-be.onrender.com/rizqi/movie/${slug}/cinemas`
+            })
+
             setMovieStatusCode(detail.status)
             setDetailMovies(detail.data.data)
+            setCinemasList(cinemas.data.data)
+
         } catch (error) {
             setMovieStatusCode(error.response.status)
         }
-    } 
+    }
+
+    const signButtonHandler = (_id, _date, _time) => {
+
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        const monthIndex = new Date().getMonth()
+        const dayIndex = new Date(_date).getDay()
+        const dayName = days[dayIndex]
+        const monthName = months[monthIndex]
+
+        const startMovie = `${dayName}, ${_date.split('-')[2]} ${monthName} ${_date.split('-')[0]} at ${_time}`
+
+
+        axios({
+            method: 'post',
+            url: `https://tickitz-be.onrender.com/rizqi/movie/${slug}/seat`,
+            data: {
+                startMovie,
+                cinemaId: _id
+            }
+        }).then(res => console.log(res))
+            .catch(err => console.log(err))
+            .finally(() => { setIsLoading(false) })
+    }
 
     React.useEffect(() => {
 
-        if (movieStatusCode === 0){
+        if (movieStatusCode === 0) {
             window.scrollTo(0, 0)
         }
 
         // i just want to show if the app 
         // has no data on first load.
-        setTimeout(()=>{
+        setTimeout(() => {
             handleInitPage()
         }, 1200)
-        
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [movieStatusCode])
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [movieStatusCode, isLoading, date, time])
 
     return (
         <div id='Page-Movie-Detail'>
             <Navbar />
             <div id='detail-movie' className='container'>
-                { movieStatusCode === 0 ?
+                {movieStatusCode === 0 ?
                     <div className='m-auto'>
                         <Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
-                    </div> : 
+                    </div> :
                     movieStatusCode === 404 ?
                         <div className='m-auto'>
                             <Player autoplay loop src="/lottie/404.json" />
@@ -70,7 +107,7 @@ const MovieDetail = () => {
                                                 <div>
                                                     <p>
                                                         <span className="content-title">
-														Release Date
+                                                            Release Date
                                                         </span>
                                                     </p>
                                                     <p>
@@ -80,7 +117,7 @@ const MovieDetail = () => {
                                                     </p>
                                                     <p>
                                                         <span className="content-title">
-														Duration
+                                                            Duration
                                                         </span>
                                                     </p>
                                                     <p>
@@ -94,7 +131,7 @@ const MovieDetail = () => {
                                                 <div>
                                                     <p>
                                                         <span className="content-title">
-														Directed By :
+                                                            Directed By :
                                                         </span>
                                                     </p>
                                                     <p>
@@ -104,7 +141,7 @@ const MovieDetail = () => {
                                                     </p>
                                                     <p>
                                                         <span className="content-title">
-														Casts :
+                                                            Casts :
                                                         </span>
                                                     </p>
                                                     <p>
@@ -116,7 +153,7 @@ const MovieDetail = () => {
                                             </div>
                                             <div className=' col-md-12 col-xs-12'>
                                                 <h5>Synopsis</h5>
-                                                <p><span className="content" style={{color: 'var(--tic-color-muted)'}}>{movie.desc}</span></p>
+                                                <p><span className="content" style={{ color: 'var(--tic-color-muted)' }}>{movie.desc}</span></p>
                                             </div>
                                         </div>
                                     </div>
@@ -124,6 +161,68 @@ const MovieDetail = () => {
                             })
                 }
 
+            </div>
+
+            <div id='select-cinema' style={{ backgroundColor: '#F5F6F8' }}>
+                <div className='container d-flex flex-column'>
+                    <h3 className='my-5' style={{ textAlign: 'center', fontWeight: 900 }}>Showtimes and Tickets</h3>
+                    <div className='d-flex flex-row justify-content-center m-auto gap-2 mb-5' style={{ maxWidth: '50%' }}>
+                        <input className='form-control' type="date" id="" onChange={(e) => {
+                            setDate(e.target.value)
+                        }} />
+                        <select className="form-select" onChange={(e) => {
+                            setTime(e.target.value)
+                        }}>
+                            <option defaultValue>Select time</option>
+
+                            <option value="10:00">10:00 WIB</option>
+                            <option value="13:00">13:00 WIB</option>
+                            <option value="16:00">16:00 WIB</option>
+                            <option value="19:00">19:00 WIB</option>
+                        </select>
+                    </div>
+
+                    <div id='card-container'>
+                        <div className='row p-2 mb-5 ciema-body'>
+                            {cinemasList.map((cinema, key) => {
+                                return (
+                                    <div key={key} className='col-md-4 col-xs-12 cinema-card'>
+                                        <div className='cinema-body d-flex flex-column p-4 justify-content-between'
+                                            style={{ backgroundColor: 'white', width: '100%', borderRadius: '6px' }}>
+                                            <div className='d-flex flex-row justify-content-between align-items-center gap-4'>
+                                                <div>
+                                                    <img src={cinema.logo} alt="logo" style={{ width: '100px' }} />
+                                                </div>
+                                                <div>
+                                                    <h5>{cinema.name}</h5>
+                                                    <p>{cinema.address}</p>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div className='d-flex justify-content-between my-3'>
+                                                {cinema.movieStart.map((time, key) => <span key={key}> {time} </span>)}
+                                            </div>
+                                            <div className='d-flex justify-content-between my-3'>
+                                                <span>Price</span> <span>Rp. {cinema.priceDisplay}</span>
+                                            </div>
+                                            <div>
+                                                <button className='btn my-3 cinema-card-button'
+                                                    style={{ width: '100%', height: '48px', fontWeight: 900, color: 'white', backgroundColor: 'var(--tic-branding-color-middle)' }}
+                                                    onClick={() => {
+                                                        setIsLoading(true)
+                                                        signButtonHandler(cinema.id, date, time)
+                                                    }} disabled={isLoading}
+                                                >
+                                                    Book Now
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </div>
             </div>
             <Footer />
         </div>
