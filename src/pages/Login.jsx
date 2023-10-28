@@ -30,10 +30,10 @@ export default function Login() {
             setPageLoginState(true)
         }).catch(err =>{
             if (err.response.status === 422) {
-                setInputError(err.response.data.messages)
+                setInputError(err?.response?.data?.messages)
             } 
             
-            if (err.response.data.status === 'ERROR') {
+            if (err?.response?.data?.messages === 'User not exist') {
                 setAuthError(err.response.data.messages)
             }
             
@@ -84,7 +84,7 @@ export default function Login() {
                                 {authError}
                             </div>
 
-                            <div class="alert alert-success" role="alert"  hidden={pageLoginState ? false : true}>
+                            <div className="alert alert-success" role="alert"  hidden={pageLoginState ? false : true}>
                                 Login success, redirect to home in {timeLeft}
                             </div>
 
@@ -93,7 +93,7 @@ export default function Login() {
                                     <span className="form-lable">Email </span>
                                     <span className='form-validation' 
                                         style={{color: '#a50000'}}
-                                        hidden={!inputError.hasOwnProperty('email')}>
+                                        hidden={!inputError.hasOwnProperty('email') ? true : false}>
                                          Email is required
                                     </span>
                                 </label>
@@ -111,9 +111,10 @@ export default function Login() {
                                     <span className="form-lable">Password</span>
                                     <span className='form-validation' 
                                         style={{color: '#a50000'}}
-                                        hidden={!inputError.hasOwnProperty('password')}>
+                                        hidden={!inputError.hasOwnProperty('password') ? true : false}>
                                          Password is required
-                                    </span></label>
+                                    </span>
+                                </label>
                                 <input id='password' type="password" className='form-control form-control-lg' placeholder='Write your password' 
                                     onChange={e=> {
                                         setPassword(e.target.value)
