@@ -59,6 +59,7 @@ nav {
 /* Offcanvas  */
 
 .canvasItem {
+  color: var(--tic-branding-color-middle);
   padding: 2vh;
   font-size: 2vh;
   font-weight: 700;

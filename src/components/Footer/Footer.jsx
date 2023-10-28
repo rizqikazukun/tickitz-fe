@@ -8,7 +8,7 @@ export default function Footer() {
             <footer className="container my-5">
                 <div className="row m-auto">
                     <div className="col-md-4 col-xs-12 p-4">
-                        <img src="/assets/img/logo.svg" alt="logo" style={{ width: '60%' }} />
+                        <img src="/assets/img/logo.svg" alt="logo" style={{ width: '60%',maxWidth: '256px', marginBottom: '10px' }} />
                         <p>
                             <span className="footer-item-content">
                                 Stop waiting in line. Buy tickets conveniently, watch movies quietly.

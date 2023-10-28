@@ -12,7 +12,8 @@
 }
 
 #left-item img {
-    max-width: 512px;
+    width: 480px;
+    margin-bottom: 20px;
     filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(181deg) brightness(102%) contrast(101%);
 }
 
@@ -23,6 +24,10 @@ h1 {
     font-weight: 600;
     line-height: normal;
     letter-spacing: 0.144px;
+}
+
+.tagline {
+    max-width: 440px;
 }
 
 #left-item p {
@@ -78,6 +83,11 @@ h1 {
     color: var(--tic-branding-color-middle);
 }
 
+#right-item label {
+    margin-bottom: 5px;
+}
+
+
 #right-item .form-lable {
     color: #4E4B66;
     font-family: Mulish;
@@ -88,7 +98,7 @@ h1 {
 }
 
 #right-item input[placeholder] {
-    color: #A0A3BD;
+    color: #535353;
     font-family: Mulish;
     font-size: 13px;
     font-style: normal;
@@ -96,6 +106,8 @@ h1 {
     line-height: normal;
     letter-spacing: 0.75px;
 }
+
+/* Forgot Password Spesific rule */
 
 div#Page-ForgotPassword div#Body-ForgotPassword div#left-item {
     display: flex;
@@ -132,6 +144,8 @@ div#Page-ForgotPassword div#Body-ForgotPassword div#left-item p {
     letter-spacing: 0.168px;
 }
 
+/* End of Forgot Password Spesific rule */
+
 /* Dot Element */
 
 .dot-body {
@@ -142,16 +156,18 @@ div#Page-ForgotPassword div#Body-ForgotPassword div#left-item p {
 }
 
 .dot-number {
-    border-radius: 50%; 
-    background-color: #fff; 
-    height: 50px; 
+    border-radius: 50%;
+    background-color: transparent;
+    border: #fff solid;
+    border-width: 2px;
+    height: 50px;
     width: 50px;
     text-align: center;
     padding-top: 3%;
 }
 
 .dot-title {
-    color: var(--tic-branding-color-middle); 
+    color: #fff;
     font-weight: 900;
 }
 
@@ -162,21 +178,9 @@ div#Page-ForgotPassword div#Body-ForgotPassword div#left-item p {
 /* End of Dot Element */
 
 
-@media screen and (max-width: 768px) {
-
-    .Page-Auth {
-        padding: 5%;
-        padding-top: 8vh;
-    }
-
-    #left-item {
-        display: none;
-    }
-
-
-    div#Page-ForgotPassword div#Body-ForgotPassword div#left-item {
-        display: none;
-    }
+/* Navbar */
+.nav-auth {
+    display: none;
 }
 
 @media screen and (max-width: 992px) {
@@ -185,4 +189,43 @@ div#Page-ForgotPassword div#Body-ForgotPassword div#left-item p {
         max-width: 90%;
     }
 
+    .tagline {
+        font-size: 5vw;
+    }
+
 }
+
+@media screen and (max-width: 768px) {
+
+    #left-item {
+        display: none;
+    }
+
+    .nav-auth {
+        display: unset;
+    }
+
+
+    .Page-Auth {
+        padding: 5%;
+        padding-top: 1vh;
+    }
+
+    #right-item h1 {
+        margin-bottom: 10px;
+        background-clip: text;
+        background: var(--tic-branding-gradient);
+        /* i thing it's will broke in some devices */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    div#Page-ForgotPassword div#Body-ForgotPassword div#left-item {
+        display: none;
+    }
+    
+
+}
+
+
+
