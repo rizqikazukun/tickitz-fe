@@ -56,6 +56,14 @@ nav {
 
 /* End of Navbar */
 
+/* Dropdown menu */
+
+#nav-right-item button:active {
+  background-color: var(--tic-branding-color-middle);
+}
+
+/* End of dropdown menu */
+
 /* Offcanvas  */
 
 .canvasItem {
