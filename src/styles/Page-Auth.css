@@ -41,7 +41,7 @@ h1 {
 
 /* Button  */
 
-#button-login {
+#button-auth {
     color: white;
     background-image: var(--tic-branding-gradient);
     border: unset;
@@ -50,21 +50,7 @@ h1 {
     font-weight: 900;
 }
 
-#button-login:hover {
-    background-image: var(--tic-branding-gradient-hover);
-    border: unset;
-}
-
-#button-register {
-    color: white;
-    background-image: var(--tic-branding-gradient);
-    border: unset;
-    height: 64px;
-
-    font-weight: 900;
-}
-
-#button-register:hover {
+#button-auth:hover {
     background-image: var(--tic-branding-gradient-hover);
     border: unset;
 }

@@ -2,7 +2,6 @@ import React from 'react'
 import '../styles/Page-Auth.css'
 import '../styles/App.css'
 import { Link, useNavigate } from 'react-router-dom'
-import '../styles/App.css'
 import Navbar from '../components/Navbar/Navbar'
 import axios from 'axios'
 
@@ -164,7 +163,7 @@ export default function Register() {
                                     }}/>
                             </div>
 						
-                            <button id='button-register' className='btn signup-button my-4'
+                            <button id='button-auth' className='btn signup-button my-4'
                                 onClick={()=>{
                                     setAuthError('')
                                     setIsLoading(true)

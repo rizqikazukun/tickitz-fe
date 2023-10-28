@@ -35,12 +35,12 @@ export default function Login() {
 
             if (err.response.status === 400) {
                 setAuthError(err.response.data.messages)
-            } 
-            
+            }
+             
             if (err.response.data.messages === 'Wrong password') {
                 setAuthError(err.response.data.messages)
-            }
-            
+            }            
+
         }).finally(()=>{
             setIsLoading(false)
         })
@@ -128,7 +128,7 @@ export default function Login() {
                                     }}/>
                             </div>
 						
-                            <button id='button-login' className='btn signup-button my-4'
+                            <button id='button-auth' className='btn signup-button my-4'
                                 onClick={()=>{
                                     setAuthError('')
                                     setIsLoading(true)
