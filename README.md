@@ -23,6 +23,18 @@ serve -s build
 - Serve  
 ``npm install -g serve``
 
+### Known UI Bug
+
+Detail Movie Page
+
+- [ ] there unresponsive page
+
+Select seat page
+
+- [ ] still can't marked booked seat
+- [ ] still can't marked selected item
+- [ ] still no error message on select seat page
+
 ## Routing Table
 
 **Pages** | **URI** | **Slug**
@@ -30,3 +42,4 @@ serve -s build
 Home          |    /    | no
 MovieDetail   | /detail | yes
 ErrorPage404  |   /*    | no
+

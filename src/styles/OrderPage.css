@@ -15,3 +15,12 @@ div#OrderPage-body div.content-container, div.content-container-child {
 	line-height: normal;
 	letter-spacing: 0.25px;
 }
+
+.seat-button {
+	margin: 1px;
+}
+
+.seat-button:hover {
+	color: white;
+	background-color: var(--tic-branding-color-middle) !important;
+}

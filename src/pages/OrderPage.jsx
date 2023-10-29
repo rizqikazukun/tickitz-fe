@@ -15,8 +15,9 @@ export default function OrderPage() {
     const [cinema, setCinema] = React.useState({})
     const [emptySeat, setEmptySeat] = React.useState({})
     const navigate = useNavigate()
+    const [selectedSeat, setSelectedSeat] = React.useState([])
 
-    console.log(location.state)
+    // console.log(location.state.cinema)
 
     const initPage = ({ id, date, time }) => {
 
@@ -38,26 +39,132 @@ export default function OrderPage() {
             }
             // eslint-disable-next-line no-console
         }).then(res => {
-            console.log(res)
+            console.log(res.data.data)
             setEmptySeat(res.data.data)
-        } )
-        // eslint-disable-next-line no-console
+
+            const element = document.getElementsByClassName('seat-button')
+
+
+            for (let index = 0; index < element.length; index++) {
+
+                Array(res.data.data.booked).map(item => {
+                    if (String(element[index].value) === String(item)) {
+                        element[index].style.backgroundColor = 'gray'
+                        return element[index].disabled = true
+                    }
+                })
+            }
+        })
+            // eslint-disable-next-line no-console
             .catch(err => console.log(err))
             .finally(() => { setIsLoading(false) })
     }
 
-    React.useState(() => {
+    const col = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+
+    const seat = (vertical, start, end) => {
+
+        const horizontalArr = []
+        for (let index = start; index < end; index++) {
+            if (horizontalArr.length === 0) {
+                horizontalArr.push(index)
+            }
+            horizontalArr.push(index + 1)
+        }
+
+        return (
+            <div className='d-flex justify-content-between m-auto'>
+                {
+                    horizontalArr.map((col) => {
+                        return (
+                            <button value={vertical + col} className='btn seat-button'
+                                style={{
+                                    height: '40px',
+                                    width: '40px',
+                                    textAlign: 'center',
+                                    fontSize: '9px',
+                                    fontWeight: 900,
+                                    borderRadius: '50%',
+                                    border: 'var(--tic-branding-color-middle) solid',
+                                }}
+                                onClick={
+                                    () => {
+
+                                        const arrIdx = selectedSeat.findIndex(item => item === `${vertical + col}`)
+
+                                        if (arrIdx === -1) {
+                                            setSelectedSeat([...selectedSeat, vertical + col])
+                                        } else if (arrIdx) {
+                                            setSelectedSeat([...selectedSeat].splice(arrIdx, 1))
+                                        }
+                                    }
+                                }
+                            >
+                                {vertical}{col}
+                            </button>
+                        )
+
+                    })
+                }
+            </div>
+        )
+    }
+
+    const handleCheckout = async () => {
+        try {
+            setIsLoading(true)
+            // HIT API BOOKING SEAT
+            const requestBooking = await axios.post(
+                'https://tickitz-be.onrender.com/rizqi/ticket/seat',
+                {
+                    movieSlug: slug,
+                    cinemaId: cinema.id, // 1, 3, 3
+                    seat: selectedSeat,
+                    startMovie: emptySeat.date,
+                },
+                {
+                    headers: {
+                        Authorization: localStorage.getItem('token'),
+                    },
+                }
+            )
+    
+            if (requestBooking.data.data.paymentId) {
+                const requestPayment = await axios.patch(
+                    `https://tickitz-be.onrender.com/rizqi/ticket/purchase/${requestBooking.data.data.paymentId}`,
+                    {},
+                    {
+                        headers: {
+                            Authorization: localStorage.getItem('token'),
+                        },
+                    }
+                )
+    
+                if (requestPayment.data.data.redirect_url) {
+                    window.location.href = requestPayment.data.data.redirect_url
+                }
+            }
+    
+            setIsLoading(false)
+        } catch (error) {
+            console.log(error)
+            setIsLoading(false)
+        }
+    }
+
+    React.useEffect(() => {
         setMovie(location.state.detailMovies[0])
         setCinema(location.state.cinema)
 
-
         initPage({
-            id : Number(cinema.id), 
-            date: location.state.date,  
+            id: location.state.cinema.id,
+            date: location.state.date,
             time: location.state.time
         })
 
     }, [cinema, movie])
+
+
 
 
     return (
@@ -83,7 +190,19 @@ export default function OrderPage() {
 
                         {/* Choose seat */}
                         <h3><span className='div-title'>Choose Your Seat</span></h3>
-                        <div className='content-container-child shadow rounded' style={{ maxWidth: '100%', height: '400px', backgroundColor: 'white' }}>
+                        <div className='content-container-child shadow rounded d-flex flex-wrap p-5 justify-content-center' style={{ maxWidth: '100%', backgroundColor: 'white' }}>
+                            <div className='d-flex flex-wrap justify-content-center gap-4' style={{ width: '100%' }} >
+                                <div>
+                                    {col.map((item) => {
+                                        return seat(item, 1, 7)
+                                    })}
+                                </div>
+                                <div>
+                                    {col.map((item) => {
+                                        return seat(item, 8, 14)
+                                    })}
+                                </div>
+                            </div>
                         </div>
                         {/* End of  Choose seat */}
                     </div>
@@ -95,7 +214,7 @@ export default function OrderPage() {
                             backgroundColor: 'white',
                             padding: '30px 15px 15px 15px'
                         }}>
-                            <p><img style={{maxWidth: '160px'}} src={cinema.logo} alt="logo" /></p>
+                            <p><img style={{ maxWidth: '160px' }} src={cinema.logo} alt="logo" /></p>
                             <p style={{
                                 color: 'var(--Text---Title, #14142B)',
                                 textAlign: 'center',
@@ -104,14 +223,14 @@ export default function OrderPage() {
                             }}>{cinema.name}</p>
 
                             <div className='d-flex justify-content-between'> <p>Movie Selected</p> {movie.title}</div>
-                            <div className='d-flex justify-content-between'> 
+                            <div className='d-flex justify-content-between'>
                                 <p>{String(emptySeat.date).split(' at ')[0]}</p>
                                 <p>{String(emptySeat.date).split(' at ')[1]}</p>
                             </div>
                             <div className='d-flex justify-content-between'><p>Ticket Price</p> <p>Rp. {cinema.priceDisplay}</p></div>
-                            <div className='d-flex justify-content-between'><p>Seat Choosed</p> <p> ----- </p></div>
+                            <div className='d-flex justify-content-between'><p>Seat Choosed</p> <p> {selectedSeat.join(', ')} </p></div>
                             <hr />
-                            <div className='d-flex justify-content-between'><p>Total Payment</p> <p>---</p></div>
+                            <div className='d-flex justify-content-between'><p>Total Payment</p> <p>Rp. {cinema.price * selectedSeat.length}</p></div>
                             <button className='btn my-2' style={{
                                 color: 'var(--tic-branding-color-middle)', backgroundColor: '#ebebeb',
                                 fontWeight: 700, border: 'unset'
@@ -119,7 +238,8 @@ export default function OrderPage() {
                             <button className='btn my-2' style={{
                                 color: 'white', backgroundColor: 'var(--tic-branding-color-middle)',
                                 fontWeight: 700, border: 'unset'
-                            }}> Checkout Now </button>
+                            }}
+                            onClick={handleCheckout}> Checkout Now </button>
                         </div>
                     </div>
 
