@@ -17,6 +17,7 @@ function Home() {
     const [mvErr, setMvErr] = React.useState([])
     const [ctaValue, setCtaValue] = React.useState('')
     const [ctaValid, setCtaValid] = React.useState(false)
+    const [ctaStatus, setCtaStatus] = React.useState('')
     const [isLoading, setIsLoading] = React.useState(false)
 
     const months = [
@@ -41,11 +42,10 @@ function Home() {
                 email: ctaValue
             }
         }).then(res => {
-            console.log(res)
-            setCtaValue('')
+            setCtaStatus('success')
 
         }).catch(err => {
-            console.log(err)
+            setCtaStatus('failed')
 
         }).finally(() => {
             setIsLoading(false)
@@ -100,6 +100,20 @@ function Home() {
     React.useEffect(() => {
         if (movies.length === 0) {
             window.scrollTo(0, 0)
+        }
+
+        if (ctaStatus === 'success') {
+            setCtaValue('')
+            document.getElementById('input-email-form').value = ''
+            setTimeout(() => {
+                setCtaStatus('')
+            }, 3000)
+        }
+
+        if (ctaStatus === 'failed') {
+            setTimeout(() => {
+                setCtaStatus('')
+            }, 3000)
         }
 
         initPage(movies, upcoming)
@@ -171,8 +185,9 @@ function Home() {
                 }
             }
         }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedMonth, ctaValid, ctaValue])
+    }, [selectedMonth, ctaValid, ctaValue, ctaStatus])
 
     return (
         <div className="AppHome">
@@ -279,6 +294,15 @@ function Home() {
                     <div className="container shadow p-3 mb-5 bg-body-white rounded text-center">
                         <p style={{ marginBottom: '-5px' }}>Be the vanguard of the</p>
                         <h1>Moviegoers</h1>
+
+                        <div className="alert alert-success" role="alert" hidden={ ctaStatus === 'success' ? false : true}>
+                            CTA Email sended
+                        </div>
+
+                        <div className="alert alert-danger" role="alert"  hidden={ ctaStatus === 'failed' ? false : true}>
+                            Email Invalid
+                        </div>
+                        
                         <div id="subcription-email-input" className="d-flex justify-content-center gap-2 my-3 m-auto"
                             style={{ height: 'fit-content', width: '80%' }}
                             onChange={(e) => {
