@@ -12,11 +12,12 @@ function Home() {
 
     const [movies, setMovie] = React.useState([])
     const [selectedMonth, setMonth] = React.useState('')
-    const [upcoming, setUpcoming ] = React.useState([])
+    const [upcoming, setUpcoming] = React.useState([])
     // eslint-disable-next-line no-unused-vars
     const [mvErr, setMvErr] = React.useState([])
     const [ctaValue, setCtaValue] = React.useState('')
     const [ctaValid, setCtaValid] = React.useState(false)
+    const [isLoading, setIsLoading] = React.useState(false)
 
     const months = [
         'January',
@@ -32,21 +33,40 @@ function Home() {
         'November',
         'December']
 
+    const ctaButtonHandler = () => {
+        axios({
+            method: 'post',
+            url: 'https://tickitz-be.onrender.com/rizqi/auth/cta',
+            data: {
+                email: ctaValue
+            }
+        }).then(res => {
+            console.log(res)
+            setCtaValue('')
+
+        }).catch(err => {
+            console.log(err)
+
+        }).finally(() => {
+            setIsLoading(false)
+        })
+    }
+
     const initPage = async (isMovies, isUpcoming) => {
         try {
             if (isMovies.length === 0 && isUpcoming.length === 0) {
 
                 const monthIndex = new Date().getMonth()
-                const currentMonth = months[monthIndex].slice(0,3).toLocaleLowerCase()
+                const currentMonth = months[monthIndex].slice(0, 3).toLocaleLowerCase()
                 setMonth(currentMonth)
 
-                const nowShowingMovies = await axios({ 
-                    method: 'get', 
-                    url: 'https://tickitz-be.onrender.com/rizqi/movie/now-showing' 
+                const nowShowingMovies = await axios({
+                    method: 'get',
+                    url: 'https://tickitz-be.onrender.com/rizqi/movie/now-showing'
                 })
 
-                const upcomingMoviesByMonth = await axios({ 
-                    method: 'get', 
+                const upcomingMoviesByMonth = await axios({
+                    method: 'get',
                     url: `https://tickitz-be.onrender.com/rizqi/movie/upcoming/${currentMonth}`
                 })
 
@@ -60,12 +80,12 @@ function Home() {
         }
     }
 
-    function upcomingMovieHandler (selectedMonth) {
+    function upcomingMovieHandler(selectedMonth) {
         const slug = selectedMonth
-        axios({ 
-            method: 'get', 
+        axios({
+            method: 'get',
             url: `https://tickitz-be.onrender.com/rizqi/movie/upcoming/${slug}`
-        }).then( 
+        }).then(
             movies =>
                 setUpcoming(movies.data.data)
         ).catch(err => setMvErr(err))
@@ -73,16 +93,16 @@ function Home() {
 
     const validateCta = (e) => {
         const ctaScheme = Joi.string().email({ tlds: { allow: false } })
-        ctaScheme.validateAsync(e.target.value).then(()=>setCtaValid(true)).catch(()=>setCtaValid(false))
+        ctaScheme.validateAsync(e.target.value).then(() => setCtaValid(true)).catch(() => setCtaValid(false))
     }
-    
+
 
     React.useEffect(() => {
         if (movies.length === 0) {
             window.scrollTo(0, 0)
         }
 
-        initPage(movies,upcoming)
+        initPage(movies, upcoming)
         upcomingMovieHandler(selectedMonth)
 
         // const movies = document.getElementsByClassName('movie-scroll')
@@ -151,8 +171,8 @@ function Home() {
                 }
             }
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedMonth, ctaValid,ctaValue])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedMonth, ctaValid, ctaValue])
 
     return (
         <div className="AppHome">
@@ -220,7 +240,7 @@ function Home() {
                             months.map(monthName => (
                                 <button key={monthName} type="button" className={
                                     monthName
-                                        .slice(0,3)
+                                        .slice(0, 3)
                                         .toLowerCase() === selectedMonth ?
                                         'months-scroll-item-selected' :
                                         'months-scroll-item'
@@ -228,7 +248,7 @@ function Home() {
                                 onClick={(e) => {
                                     document.getElementById('months-scroll')
                                         .scrollLeft = 0
-                                    setMonth(monthName.slice(0,3).toLowerCase())
+                                    setMonth(monthName.slice(0, 3).toLowerCase())
                                 }}>
                                     {monthName}
                                 </button>))}
@@ -238,11 +258,11 @@ function Home() {
                             upcoming.length === 0 ?
                                 <div className='m-auto'>
                                     <Player autoplay loop src="/lottie/loading-movie.json" style={{ height: '300px', width: '300px' }} />
-                                </div> : 
+                                </div> :
                                 movies.length === 0 ?
                                     <div className='m-auto'>
                                         <Player autoplay loop src="/lottie/movie-card-404.json" style={{ height: '300px', width: '300px' }} />
-                                    </div> : 
+                                    </div> :
                                     upcoming
                                         .slice(0, 5)
                                         .map((movie, key) => {
@@ -261,23 +281,28 @@ function Home() {
                         <h1>Moviegoers</h1>
                         <div id="subcription-email-input" className="d-flex justify-content-center gap-2 my-3 m-auto"
                             style={{ height: 'fit-content', width: '80%' }}
-                            onChange={(e)=>{
+                            onChange={(e) => {
                                 validateCta(e)
                                 setCtaValue(e.target.value)
                             }}>
                             <input style={{ height: '53px', width: '38vh' }} type="email" className="form-control" id="input-email-form"
                                 placeholder="Type your email" />
-                            <button 
-                                style={{ height: '53px', width: '14vh' }} 
-                                id="input-email" 
-                                className="btn form-control" 
-                                disabled={!ctaValid ? true : false }>
-                                    Join Now
+                            <button
+                                style={{ height: '53px', width: '14vh' }}
+                                id="input-email"
+                                className="btn form-control"
+                                onClick={() => {
+                                    setIsLoading(true)
+                                    ctaButtonHandler()
+
+                                }}
+                                disabled={!ctaValid ? true : false || isLoading ? true : false}>
+                                {!isLoading ? 'Join Now' : 'Loading...'}
                             </button>
                         </div>
                         <p style={{ fontSize: '14px' }}>
-							By joining you as a Tickitz member,<br />
-							we will always send you the latest updates via email.
+                            By joining you as a Tickitz member,<br />
+                            we will always send you the latest updates via email.
                         </p>
                     </div>
                 </section>
