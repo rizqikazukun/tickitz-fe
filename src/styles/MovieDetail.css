@@ -73,4 +73,12 @@
 }
 
 
+.cinema-card-button {
+    width: 100% !important; 
+    height: 48px !important; 
+    font-weight: 900 !important; 
+    color: white !important;
+    background-color: var(--tic-branding-color-middle) !important;
+}
+
 

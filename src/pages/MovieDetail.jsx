@@ -1,6 +1,5 @@
-
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer/Footer'
 import axios from 'axios'
@@ -17,7 +16,8 @@ const MovieDetail = () => {
     const [cinemasList, setCinemasList] = React.useState([])
     const [date, setDate] = React.useState('')
     const [time, setTime] = React.useState('')
-    const [isLoading, setIsLoading] = React.useState(false)
+    const isDisable = date === '' ? true : time === '' ? true : false || time === '' ? true : date === '' ? true : false
+    const navigate = useNavigate()
 
     const handleInitPage = async () => {
         try {
@@ -40,30 +40,6 @@ const MovieDetail = () => {
         }
     }
 
-    const signButtonHandler = (_id, _date, _time) => {
-
-        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-        const monthIndex = new Date(_date).getMonth()
-        const dayIndex = new Date(_date).getDay()
-        const dayName = days[dayIndex]
-        const monthName = months[monthIndex]
-
-        const startMovie = `${dayName}, ${_date.split('-')[2]} ${monthName} ${_date.split('-')[0]} at ${_time}`
-
-
-        axios({
-            method: 'post',
-            url: `https://tickitz-be.onrender.com/rizqi/movie/${slug}/seat`,
-            data: {
-                startMovie,
-                cinemaId: _id
-            }
-        }).then(res => console.log(res))
-            .catch(err => console.log(err))
-            .finally(() => { setIsLoading(false) })
-    }
-
     React.useEffect(() => {
 
         if (movieStatusCode === 0) {
@@ -77,7 +53,7 @@ const MovieDetail = () => {
         }, 1200)
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [movieStatusCode, isLoading, date, time])
+    }, [movieStatusCode, date, time])
 
     return (
         <div id='Page-Movie-Detail'>
@@ -163,7 +139,7 @@ const MovieDetail = () => {
 
             </div>
 
-            <div id='select-cinema' style={{ backgroundColor: '#F5F6F8' }}>
+            <div id='select-cinema' style={{ backgroundColor: 'rgb(243 243 243)' }}>
                 <div className='container d-flex flex-column'>
                     <h3 className='my-5' style={{ textAlign: 'center', fontWeight: 900 }}>Showtimes and Tickets</h3>
                     <div className='d-flex flex-row justify-content-center m-auto gap-2 mb-5' style={{ maxWidth: '50%' }}>
@@ -207,12 +183,11 @@ const MovieDetail = () => {
                                             </div>
                                             <div>
                                                 <button className='btn my-3 cinema-card-button'
-                                                    style={{ width: '100%', height: '48px', fontWeight: 900, color: 'white', backgroundColor: 'var(--tic-branding-color-middle)' }}
-                                                    onClick={() => {
-                                                        setIsLoading(true)
-                                                        signButtonHandler(cinema.id, date, time)
-                                                    }} disabled={isLoading}
-                                                >
+                                                    onClick={()=>{
+                                                        navigate( `/movie/${slug}/seat/` ,{state:{time,date,cinema,detailMovies}})
+                                                    }}
+                                                    disabled={isDisable ? true : false}>
+                                                    {/* Bug Can't use && in this conditional rendering */}
                                                     Book Now
                                                 </button>
                                             </div>

@@ -5,8 +5,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import Register from '../pages/Register'
 import Login from '../pages/Login'
 import ForgotPassword from '../pages/ForgotPassword'
-
-
+import OrderPage from '../pages/OrderPage'
 
 const router = createBrowserRouter([
     {
@@ -16,10 +15,6 @@ const router = createBrowserRouter([
     {
         path: '/detail/:slug',
         element: <MovieDetail/>
-    },
-    {
-        path: '*',
-        element: <ErrorPage404/>
     },
     {
         path: '/register',
@@ -32,6 +27,14 @@ const router = createBrowserRouter([
     {
         path: '/forgot-password',
         element: <ForgotPassword/>
+    },
+    {
+        path: '/movie/:slug/seat/',
+        element: <OrderPage/>
+    },
+    {
+        path: '*',
+        element: <ErrorPage404/>
     }
 ])
 

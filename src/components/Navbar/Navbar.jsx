@@ -149,7 +149,7 @@ export default function Navbar() {
     }, [profile])
 
     return (
-        <div id='navbar'>
+        <div id='navbar' style={{backgroundColor: 'white' }}>
             {/* <!-- nav link --> */}
             <nav className="container d-flex justify-content-between">
                 <div id="nav-left-item" className="gap-4">
