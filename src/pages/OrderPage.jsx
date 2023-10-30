@@ -16,7 +16,7 @@ export default function OrderPage() {
     const [emptySeat, setEmptySeat] = React.useState({})
     const navigate = useNavigate()
     const [selectedSeat, setSelectedSeat] = React.useState([])
-    const [booked, setBooked] = React.useState([])
+    const [booked, setBooked] = React.useState(undefined)
 
     // console.log(location.state.cinema)
 
@@ -91,7 +91,7 @@ export default function OrderPage() {
                                         }
                                     }
                                 }
-                                disabled={Array(booked).findIndex(index => index === `${vertical+col}`) !== -1 ? true : false }
+                                disabled={ !booked ? false : [...booked].findIndex(index => index === `${vertical+col}`) !== -1 ? true : false }
                             >
                                 {vertical}{col}
                             </button>
