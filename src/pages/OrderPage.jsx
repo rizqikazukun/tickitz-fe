@@ -16,6 +16,7 @@ export default function OrderPage() {
     const [emptySeat, setEmptySeat] = React.useState({})
     const navigate = useNavigate()
     const [selectedSeat, setSelectedSeat] = React.useState([])
+    const [booked, setBooked] = React.useState([])
 
     // console.log(location.state.cinema)
 
@@ -37,23 +38,11 @@ export default function OrderPage() {
                 startMovie,
                 cinemaId: id
             }
-            // eslint-disable-next-line no-console
         }).then(res => {
+            // eslint-disable-next-line no-console
             console.log(res.data.data)
             setEmptySeat(res.data.data)
-
-            const element = document.getElementsByClassName('seat-button')
-
-
-            for (let index = 0; index < element.length; index++) {
-
-                Array(res.data.data.booked).map(item => {
-                    if (String(element[index].value) === String(item)) {
-                        element[index].style.backgroundColor = 'gray'
-                        return element[index].disabled = true
-                    }
-                })
-            }
+            setBooked(res.data.data.booked)
         })
             // eslint-disable-next-line no-console
             .catch(err => console.log(err))
@@ -78,6 +67,7 @@ export default function OrderPage() {
                     horizontalArr.map((col) => {
                         return (
                             <button value={vertical + col} className='btn seat-button'
+                            
                                 style={{
                                     height: '40px',
                                     width: '40px',
@@ -88,17 +78,20 @@ export default function OrderPage() {
                                     border: 'var(--tic-branding-color-middle) solid',
                                 }}
                                 onClick={
-                                    () => {
-
+                                    (e) => {
                                         const arrIdx = selectedSeat.findIndex(item => item === `${vertical + col}`)
 
                                         if (arrIdx === -1) {
                                             setSelectedSeat([...selectedSeat, vertical + col])
-                                        } else if (arrIdx) {
-                                            setSelectedSeat([...selectedSeat].splice(arrIdx, 1))
+                                            e.target.style.backgroundColor = 'var(--tic-branding-color-middle)'
+                                        } 
+                                        if (arrIdx !== -1) {
+                                            setSelectedSeat([...selectedSeat.splice(arrIdx, 1)])
+                                            e.target.style.backgroundColor = 'white'
                                         }
                                     }
                                 }
+                                disabled={booked.findIndex(index => index === `${vertical+col}`) !== -1 ? true : false }
                             >
                                 {vertical}{col}
                             </button>
@@ -147,6 +140,7 @@ export default function OrderPage() {
     
             setIsLoading(false)
         } catch (error) {
+            // eslint-disable-next-line no-console
             console.log(error)
             setIsLoading(false)
         }
@@ -162,7 +156,8 @@ export default function OrderPage() {
             time: location.state.time
         })
 
-    }, [cinema, movie])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cinema, movie, selectedSeat])
 
 
 

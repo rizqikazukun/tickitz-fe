@@ -31,9 +31,11 @@ Detail Movie Page
 
 Select seat page
 
-- [ ] still can't marked booked seat
-- [ ] still can't marked selected item
+- [ ] change movie button above checkout button not associated
+- [x] still can't marked booked seat
+- [x] still can't marked selected item
 - [ ] still no error message on select seat page
+- [ ] unselect seat still not working
 
 ## Routing Table
 
@@ -42,4 +44,3 @@ Select seat page
 Home          |    /    | no
 MovieDetail   | /detail | yes
 ErrorPage404  |   /*    | no
-

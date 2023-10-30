@@ -20,6 +20,16 @@ div#OrderPage-body div.content-container, div.content-container-child {
 	margin: 1px;
 }
 
+seat-button-selected {
+	color: white !important;
+	background-color: var(--tic-branding-color-middle) !important;
+}
+
+.seat-button:disabled {
+	color: white;
+	background-color: gray;
+}
+
 .seat-button:hover {
 	color: white;
 	background-color: var(--tic-branding-color-middle) !important;
