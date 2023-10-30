@@ -36,4 +36,3 @@ serve -s build
 - [x] still can't marked selected item
 - [x] still no error message on select seat page
 - [x] there unresponsive page
-

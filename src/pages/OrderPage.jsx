@@ -20,7 +20,6 @@ export default function OrderPage() {
     const [authError, setAuthError] = React.useState('')
     const [inputError, setInputError] = React.useState('')
     const [isSuccess, setIsSuccess] = React.useState(false)
-    const [timeLeft, setTimeLeft] = React.useState(5)
 
     const initPage = ({ id, date, time }) => {
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -39,18 +38,17 @@ export default function OrderPage() {
                 cinemaId: id
             }
         }).then(res => {
-            // eslint-disable-next-line no-console
-            console.log(res.data.data)
             setEmptySeat(res.data.data)
             setBooked(res.data.data.booked)
         })
             .catch(err => {
-                console.log(err)
                 if (err.response.status === 422) {
                     setInputError(err.response.data.messages.seat.message)
                 }
             })
-            .finally(() => { setIsLoading(false) })
+            .finally(() => {
+                setIsLoading(false)
+            })
     }
 
     const col = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
@@ -144,12 +142,11 @@ export default function OrderPage() {
             }
 
         } catch (err) {
-            console.log(err)
 
             if (err.response.status === 401) {
                 setAuthError(err.response.data.messages)
             }
-        
+
             if (err.response.status === 422) {
                 setInputError(err.response.data.messages.seat.message)
             }
@@ -164,26 +161,15 @@ export default function OrderPage() {
         setCinema(location.state.cinema)
 
         if (inputError) {
-            setTimeout(()=>{
+            setTimeout(() => {
                 setInputError('')
-            },2000)
+            }, 2000)
         }
 
         if (authError) {
-            setTimeout(()=>{
-                setAuthError('')
-            },2000)
-        }
-
-        if (isSuccess) {
             setTimeout(() => {
-                for (let time = timeLeft; time > 0; time--) {
-                    setTimeLeft(timeLeft - 1)
-                }
-                if (timeLeft === 0) {
-                    return navigate('/')
-                }
-            }, 1000)
+                setAuthError('')
+            }, 2000)
         }
 
         initPage({
@@ -194,8 +180,6 @@ export default function OrderPage() {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cinema, movie, selectedSeat, inputError, authError, isSuccess])
-
-
 
 
     return (
@@ -221,7 +205,18 @@ export default function OrderPage() {
 
                         {/* Choose seat */}
                         <h3><span className='div-title'>Choose Your Seat</span></h3>
-                        <div className='content-container-child shadow rounded d-flex flex-wrap p-5 justify-content-center' style={{ maxWidth: '100%', backgroundColor: 'white' }}>
+                        <div className='content-container-child shadow rounded d-flex flex-wrap p-5 justify-content-center'
+                            style={{ maxWidth: '100%', backgroundColor: 'white' }}>
+
+                            <div className='d-flex flex-wrap justify-content-center gap-4' style={{ width: '80%' }}>
+                                <div className='my-5 d-flex justify-content-center' style={{
+                                    width: '100%',
+                                    border: 'var(--tic-branding-color-middle) solid',
+                                    borderRadius: '15px',
+                                    fontWeight: 900,
+                                    fontSize: '12px'
+                                }}>Screen</div>
+                            </div>
                             <div className='d-flex flex-wrap justify-content-center gap-4' style={{ width: '100%' }} >
                                 <div>
                                     {col.map((item) => {
@@ -233,6 +228,58 @@ export default function OrderPage() {
                                         return seat(item, 8, 14)
                                     })}
                                 </div>
+                            </div>
+
+                            <div className='d-flex flex-wrap flex-column mt-5' style={{ width: '80%' }}>
+                                <p><span className='div-title' style={{ fontSize: '18px' }}>Seating Key</span></p>
+                                <div className='d-flex flex-row flex-wrap gap-3'>
+                                    
+                                    <div className='d-flex flex-row justify-content-center align-content-center gap-3'>
+                                        <div style={{
+                                            height: '40px',
+                                            width: '40px',
+                                            textAlign: 'center',
+                                            fontSize: '9px',
+                                            fontWeight: 900,
+                                            borderRadius: '50%',
+                                            border: 'var(--tic-branding-color-middle) solid',
+                                            marginTop: '-8px'
+                                        }}></div>
+                                        <p>Available</p>
+                                    </div>
+
+                                    <div className='d-flex flex-row justify-content-center align-content-center gap-3'>
+                                        <div style={{
+                                            height: '40px',
+                                            width: '40px',
+                                            textAlign: 'center',
+                                            fontSize: '9px',
+                                            fontWeight: 900,
+                                            borderRadius: '50%',
+                                            backgroundColor: 'var(--tic-branding-color-middle)',
+                                            border: 'var(--tic-branding-color-middle) solid',
+                                            marginTop: '-8px'
+                                        }}></div>
+                                        <p>Selected</p>
+                                    </div>
+
+                                    <div className='d-flex flex-row justify-content-center align-content-center gap-3'>
+                                        <div style={{
+                                            height: '40px',
+                                            width: '40px',
+                                            textAlign: 'center',
+                                            fontSize: '9px',
+                                            fontWeight: 900,
+                                            borderRadius: '50%',
+                                            border: 'var(--tic-branding-color-middle) solid',
+                                            backgroundColor: 'gray',
+                                            marginTop: '-8px',
+                                        }}></div>
+                                        <p>Sold</p>
+                                    </div>
+                                    
+                                </div>
+
                             </div>
                         </div>
                         {/* End of  Choose seat */}
@@ -289,7 +336,7 @@ export default function OrderPage() {
                                 setIsLoading(true)
                                 handleCheckout()
                             }}
-                            disabled={isLoading ? true : false}> {isLoading ? 'isLoading...' : 'Checkout Now'}</button>
+                            disabled={isLoading ? true : false}> {isLoading ? 'Loading...' : 'Checkout Now'}</button>
                         </div>
                     </div>
                 </div>
