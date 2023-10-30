@@ -163,7 +163,7 @@ const MovieDetail = () => {
                             {cinemasList.map((cinema, key) => {
                                 return (
                                     <div key={key} className='col-md-4 col-xs-12 cinema-card'>
-                                        <div className='cinema-body d-flex flex-column p-4 justify-content-between mb-5'
+                                        <div className='cinema-body d-flex flex-column p-4 justify-content-between mb-5 shadow rounded'
                                             style={{ backgroundColor: 'white', width: '100%', borderRadius: '6px' }}>
                                             <div className='d-flex flex-row justify-content-between align-items-center gap-4'>
                                                 <div>

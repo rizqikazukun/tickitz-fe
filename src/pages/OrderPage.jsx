@@ -17,18 +17,18 @@ export default function OrderPage() {
     const navigate = useNavigate()
     const [selectedSeat, setSelectedSeat] = React.useState([])
     const [booked, setBooked] = React.useState(undefined)
-
-    // console.log(location.state.cinema)
+    const [authError, setAuthError] = React.useState('')
+    const [inputError, setInputError] = React.useState('')
+    const [isSuccess, setIsSuccess] = React.useState(false)
+    const [timeLeft, setTimeLeft] = React.useState(5)
 
     const initPage = ({ id, date, time }) => {
-
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
         const monthIndex = new Date(date).getMonth()
         const dayIndex = new Date(date).getDay()
         const dayName = days[dayIndex]
         const monthName = months[monthIndex]
-
         const startMovie = `${dayName}, ${date.split('-')[2]} ${monthName} ${date.split('-')[0]} at ${time}`
 
         axios({
@@ -44,8 +44,12 @@ export default function OrderPage() {
             setEmptySeat(res.data.data)
             setBooked(res.data.data.booked)
         })
-            // eslint-disable-next-line no-console
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                if (err.response.status === 422) {
+                    setInputError(err.response.data.messages.seat.message)
+                }
+            })
             .finally(() => { setIsLoading(false) })
     }
 
@@ -67,7 +71,7 @@ export default function OrderPage() {
                     horizontalArr.map((col) => {
                         return (
                             <button value={vertical + col} className='btn seat-button'
-                            
+
                                 style={{
                                     height: '40px',
                                     width: '40px',
@@ -84,14 +88,14 @@ export default function OrderPage() {
                                         if (arrIdx === -1) {
                                             setSelectedSeat([...selectedSeat, vertical + col])
                                             e.target.style.backgroundColor = 'var(--tic-branding-color-middle)'
-                                        } 
+                                        }
                                         if (arrIdx !== -1) {
                                             setSelectedSeat([...selectedSeat.splice(arrIdx, 1)])
                                             e.target.style.backgroundColor = 'white'
                                         }
                                     }
                                 }
-                                disabled={ !booked ? false : [...booked].findIndex(index => index === `${vertical+col}`) !== -1 ? true : false }
+                                disabled={!booked ? false : [...booked].findIndex(index => index === `${vertical + col}`) !== -1 ? true : false}
                             >
                                 {vertical}{col}
                             </button>
@@ -106,12 +110,11 @@ export default function OrderPage() {
     const handleCheckout = async () => {
         try {
             setIsLoading(true)
-            // HIT API BOOKING SEAT
             const requestBooking = await axios.post(
                 'https://tickitz-be.onrender.com/rizqi/ticket/seat',
                 {
                     movieSlug: slug,
-                    cinemaId: cinema.id, // 1, 3, 3
+                    cinemaId: cinema.id,
                     seat: selectedSeat,
                     startMovie: emptySeat.date,
                 },
@@ -121,27 +124,37 @@ export default function OrderPage() {
                     },
                 }
             )
-    
+
             if (requestBooking.data.data.paymentId) {
                 const requestPayment = await axios.patch(
                     `https://tickitz-be.onrender.com/rizqi/ticket/purchase/${requestBooking.data.data.paymentId}`,
-                    {},
+                    {
+                        //empty-body-data
+                    },
                     {
                         headers: {
                             Authorization: localStorage.getItem('token'),
                         },
                     }
                 )
-    
                 if (requestPayment.data.data.redirect_url) {
+                    setIsSuccess(true)
                     window.location.href = requestPayment.data.data.redirect_url
                 }
             }
-    
-            setIsLoading(false)
-        } catch (error) {
-            // eslint-disable-next-line no-console
-            console.log(error)
+
+        } catch (err) {
+            console.log(err)
+
+            if (err.response.status === 401) {
+                setAuthError(err.response.data.messages)
+            }
+        
+            if (err.response.status === 422) {
+                setInputError(err.response.data.messages.seat.message)
+            }
+
+        } finally {
             setIsLoading(false)
         }
     }
@@ -150,14 +163,37 @@ export default function OrderPage() {
         setMovie(location.state.detailMovies[0])
         setCinema(location.state.cinema)
 
+        if (inputError) {
+            setTimeout(()=>{
+                setInputError('')
+            },2000)
+        }
+
+        if (authError) {
+            setTimeout(()=>{
+                setAuthError('')
+            },2000)
+        }
+
+        if (isSuccess) {
+            setTimeout(() => {
+                for (let time = timeLeft; time > 0; time--) {
+                    setTimeLeft(timeLeft - 1)
+                }
+                if (timeLeft === 0) {
+                    return navigate('/')
+                }
+            }, 1000)
+        }
+
         initPage({
             id: location.state.cinema.id,
             date: location.state.date,
             time: location.state.time
         })
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cinema, movie, selectedSeat])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cinema, movie, selectedSeat, inputError, authError, isSuccess])
 
 
 
@@ -179,7 +215,7 @@ export default function OrderPage() {
                                 <button className='btn' style={{
                                     color: 'var(--tic-branding-color-middle)', backgroundColor: '#ebebeb',
                                     fontWeight: 700, border: 'unset'
-                                }} onClick={() => { navigate(-1) }}>Change Movie</button></div>
+                                }} onClick={() => { navigate('/') }}>Change Movie</button></div>
                         </div>
                         {/* End of Movie Selected */}
 
@@ -217,7 +253,20 @@ export default function OrderPage() {
                                 fontWeight: 600
                             }}>{cinema.name}</p>
 
+                            <div className="alert alert-danger" role="alert" hidden={authError === '' ? true : false}>
+                                Sorry, Please login first!
+                            </div>
+
+                            <div className="alert alert-danger" role="alert" hidden={inputError === '' ? true : false}>
+                                Sorry, No seat choosed.
+                            </div>
+
+                            <div className="alert alert-success" role="alert" hidden={isSuccess ? false : true}>
+                                Booked, You will redirect to the payment.
+                            </div>
+
                             <div className='d-flex justify-content-between'> <p>Movie Selected</p> {movie.title}</div>
+
                             <div className='d-flex justify-content-between'>
                                 <p>{String(emptySeat.date).split(' at ')[0]}</p>
                                 <p>{String(emptySeat.date).split(' at ')[1]}</p>
@@ -229,22 +278,21 @@ export default function OrderPage() {
                             <button className='btn my-2' style={{
                                 color: 'var(--tic-branding-color-middle)', backgroundColor: '#ebebeb',
                                 fontWeight: 700, border: 'unset'
-                            }}> Change Movie </button>
+                            }}
+                            onClick={() => { navigate(-1) }} >Change Cinema</button>
                             <button className='btn my-2' style={{
                                 color: 'white', backgroundColor: 'var(--tic-branding-color-middle)',
                                 fontWeight: 700, border: 'unset'
                             }}
-                            onClick={handleCheckout}> Checkout Now </button>
+                            onClick={() => {
+                                setAuthError('')
+                                setIsLoading(true)
+                                handleCheckout()
+                            }}
+                            disabled={isLoading ? true : false}> {isLoading ? 'isLoading...' : 'Checkout Now'}</button>
                         </div>
                     </div>
-
-
-
                 </div>
-
-
-
-
             </div>
             <Footer />
         </div>

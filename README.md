@@ -25,24 +25,15 @@ serve -s build
 
 ### Known UI Bug
 
-Detail Movie Page
+- [ ] Unselect seat still not working on select seat page
 
-- [ ] there unresponsive page
+### Recent Issue
 
-Select seat page
-
-- [ ] change movie button above checkout button not associated
+- [x] No loading indicator
+- [x] No error handler
+- [x] change movie button above checkout button not associated
 - [x] still can't marked booked seat
 - [x] still can't marked selected item
-- [ ] still no error message on select seat page
-- [ ] unselect seat still not working
-- [ ] No loading indicator
-- [ ] No error handler
+- [x] still no error message on select seat page
+- [x] there unresponsive page
 
-## Routing Table
-
-**Pages** | **URI** | **Slug**
---------------|:-------:|:--------:
-Home          |    /    | no
-MovieDetail   | /detail | yes
-ErrorPage404  |   /*    | no
