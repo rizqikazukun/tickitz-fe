@@ -142,7 +142,7 @@ const MovieDetail = () => {
             <div id='select-cinema' style={{ backgroundColor: 'rgb(243 243 243)' }}>
                 <div className='container d-flex flex-column'>
                     <h3 className='my-5' style={{ textAlign: 'center', fontWeight: 900 }}>Showtimes and Tickets</h3>
-                    <div className='d-flex flex-row justify-content-center m-auto gap-2 mb-5' style={{ maxWidth: '50%' }}>
+                    <div className='d-flex flex-row justify-content-center m-auto gap-2 mb-5'>
                         <input className='form-control' type="date" id="" onChange={(e) => {
                             setDate(e.target.value)
                         }} />
@@ -163,7 +163,7 @@ const MovieDetail = () => {
                             {cinemasList.map((cinema, key) => {
                                 return (
                                     <div key={key} className='col-md-4 col-xs-12 cinema-card'>
-                                        <div className='cinema-body d-flex flex-column p-4 justify-content-between'
+                                        <div className='cinema-body d-flex flex-column p-4 justify-content-between mb-5'
                                             style={{ backgroundColor: 'white', width: '100%', borderRadius: '6px' }}>
                                             <div className='d-flex flex-row justify-content-between align-items-center gap-4'>
                                                 <div>

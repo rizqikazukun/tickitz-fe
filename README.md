@@ -36,6 +36,8 @@ Select seat page
 - [x] still can't marked selected item
 - [ ] still no error message on select seat page
 - [ ] unselect seat still not working
+- [ ] No loading indicator
+- [ ] No error handler
 
 ## Routing Table
 
