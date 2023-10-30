@@ -1,7 +1,12 @@
 # Tickitz fe  
 
-It's a tickitz frontend. learning base project from pijarcamp.  
+It's a tickitz frontend. learning base project from pijarcamp. This a movie cinema ticketing app, you can see current month movie show, and upcoming movie on next month. also this project was integrating with midtrans payment gateway on sandbox environment.  
+
 Author : Rizqi Pratama  
+Library : ReactJS  
+Dev Preview : <https://tickitz-app.vercel.app/>
+  
+![](./docs/overview.png)
 
 ## How to run
 
@@ -23,11 +28,13 @@ serve -s build
 - Serve  
 ``npm install -g serve``
 
-### Known UI Bug
+## Issue
+
+### Known Issue
 
 - [ ] Unselect seat still not working on select seat page
 
-### Recent Issue
+### Fixed Recent Issue
 
 - [x] No loading indicator
 - [x] No error handler
