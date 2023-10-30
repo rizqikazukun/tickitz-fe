@@ -91,7 +91,7 @@ export default function OrderPage() {
                                         }
                                     }
                                 }
-                                disabled={booked.findIndex(index => index === `${vertical+col}`) !== -1 ? true : false }
+                                disabled={Array(booked).findIndex(index => index === `${vertical+col}`) !== -1 ? true : false }
                             >
                                 {vertical}{col}
                             </button>
