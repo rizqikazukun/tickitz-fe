@@ -21,6 +21,7 @@ Preview : <https://tickitz-app.vercel.app>
 	- [Issue](#issue)
 		- [Known Issue](#known-issue)
 		- [Fixed Recent Issue](#fixed-recent-issue)
+	- [Releated Project](#releated-project)
 
 ## Screenshoot
 
@@ -62,3 +63,9 @@ serve -s build
 - [x] still can't marked selected item
 - [x] still no error message on select seat page
 - [x] there unresponsive page
+
+## Releated Project
+
+- [✨ Tickitz Web Demo](https://tickitz-app.vercel.app)
+- [✨ TicKitz Web Frontend](https://github.com/rizqikazukun/tickitz-fe)
+- [✨ TicKitz Web Backend](https://github.com/rizqikazukun/tickitz-be)
