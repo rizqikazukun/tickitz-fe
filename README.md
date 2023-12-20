@@ -1,8 +1,8 @@
-# Tickitz fe  
+# TicKitz Web Frontend
 
 ![logo](docs/tickitz.png)
 
-It's a tickitz frontend. learning base project from pijarcamp. This a movie cinema ticketing app, you can see current month movie show, and upcoming movie on next month. also this project was integrating with midtrans payment gateway on sandbox environment.  
+It's a tickitz frontend. learning base project from pijarcamp. This a movie cinema ticketing app, you can see current month movie show, and upcoming movie on next month.  
 
 Developer : Rizqi Pratama  
 Tech Stack : Javascript, ReactJS, React Router, Bootstrap, Midtrans Payment Gateway  
@@ -13,7 +13,7 @@ Preview : <https://tickitz-app.vercel.app>
 
 ## Table of content
 
-- [Tickitz fe](#tickitz-fe)
+- [TicKitz Web Frontend](#tickitz-web-frontend)
 	- [Table of content](#table-of-content)
 	- [Screenshoot](#screenshoot)
 	- [How to run](#how-to-run)
