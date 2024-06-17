@@ -55,6 +55,18 @@ const MovieDetail = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [movieStatusCode, date, time])
 
+    const cinemaLogos = {
+        hiflix: '/assets/img/cinemas/hiflix 2.svg',
+        ebv: '/assets/img/cinemas/ebv.id 2.svg',
+        cineone: '/assets/img/cinemas/CineOne21 2.svg'
+    }
+
+    const cinemaLogoImg = (cinema) => {
+        const key = Object.keys(cinemaLogos).find(a => a.toLowerCase().slice(0, 3) === String(cinema.name).toLowerCase().slice(0, 3))
+
+        return cinemaLogos[key]
+    }
+
     return (
         <div id='Page-Movie-Detail'>
             <Navbar />
@@ -167,7 +179,7 @@ const MovieDetail = () => {
                                             style={{ backgroundColor: 'white', width: '100%', borderRadius: '6px' }}>
                                             <div className='d-flex flex-row justify-content-between align-items-center gap-4'>
                                                 <div>
-                                                    <img src={cinema.logo} alt="logo" style={{ width: '100px' }} />
+                                                    <img src={cinemaLogoImg(cinema)} alt="logo" style={{ width: '100px' }} />
                                                 </div>
                                                 <div>
                                                     <h5>{cinema.name}</h5>
@@ -183,8 +195,8 @@ const MovieDetail = () => {
                                             </div>
                                             <div>
                                                 <button className='btn my-3 cinema-card-button'
-                                                    onClick={()=>{
-                                                        navigate( `/movie/${slug}/seat/` ,{state:{time,date,cinema,detailMovies}})
+                                                    onClick={() => {
+                                                        navigate(`/movie/${slug}/seat/`, { state: { time, date, cinema, detailMovies } })
                                                     }}
                                                     disabled={isDisable ? true : false}>
                                                     {/* Bug Can't use && in this conditional rendering */}
