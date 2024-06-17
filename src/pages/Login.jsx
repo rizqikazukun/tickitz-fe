@@ -19,7 +19,7 @@ export default function Login() {
     const signButtonHandler = () => {
         axios({
             method: 'post', 
-            url: 'https://pijar-camp-batch15-tickitz.cyclic.app/rizqi/auth/login',
+            url: 'https://tikitz-v2.adaptable.app/rizqi/auth/login',
             data: {
                 email,
                 password

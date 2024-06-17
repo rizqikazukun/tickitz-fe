@@ -37,7 +37,7 @@ function Home() {
     const ctaButtonHandler = () => {
         axios({
             method: 'post',
-            url: 'https://pijar-camp-batch15-tickitz.cyclic.app/rizqi/auth/cta',
+            url: 'https://tikitz-v2.adaptable.app/rizqi/auth/cta',
             data: {
                 email: ctaValue
             }
@@ -62,12 +62,12 @@ function Home() {
 
                 const nowShowingMovies = await axios({
                     method: 'get',
-                    url: 'https://pijar-camp-batch15-tickitz.cyclic.app/rizqi/movie/now-showing'
+                    url: 'https://tikitz-v2.adaptable.app/rizqi/movie/now-showing'
                 })
 
                 const upcomingMoviesByMonth = await axios({
                     method: 'get',
-                    url: `https://pijar-camp-batch15-tickitz.cyclic.app/rizqi/movie/upcoming/${currentMonth}`
+                    url: `https://tikitz-v2.adaptable.app/rizqi/movie/upcoming/${currentMonth}`
                 })
 
                 setMovie(nowShowingMovies.data.data)
@@ -84,7 +84,7 @@ function Home() {
         const slug = selectedMonth
         axios({
             method: 'get',
-            url: `https://pijar-camp-batch15-tickitz.cyclic.app/rizqi/movie/upcoming/${slug}`
+            url: `https://tikitz-v2.adaptable.app/rizqi/movie/upcoming/${slug}`
         }).then(
             movies =>
                 setUpcoming(movies.data.data)

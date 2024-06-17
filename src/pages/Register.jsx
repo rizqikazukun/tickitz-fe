@@ -24,7 +24,7 @@ export default function Register() {
     const registerButtonHandler = () => {
         axios({
             method: 'post', 
-            url: 'https://pijar-camp-batch15-tickitz.cyclic.app/rizqi/auth/register',
+            url: 'https://tikitz-v2.adaptable.app/rizqi/auth/register',
             data: {
                 email,
                 password,

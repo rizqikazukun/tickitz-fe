@@ -32,7 +32,7 @@ export default function OrderPage() {
 
         axios({
             method: 'post',
-            url: `https://pijar-camp-batch15-tickitz.cyclic.app/rizqi/movie/${slug}/seat`,
+            url: `https://tikitz-v2.adaptable.app/rizqi/movie/${slug}/seat`,
             data: {
                 startMovie,
                 cinemaId: id
@@ -109,7 +109,7 @@ export default function OrderPage() {
         try {
             setIsLoading(true)
             const requestBooking = await axios.post(
-                'https://pijar-camp-batch15-tickitz.cyclic.app/rizqi/ticket/seat',
+                'https://tikitz-v2.adaptable.app/rizqi/ticket/seat',
                 {
                     movieSlug: slug,
                     cinemaId: cinema.id,
@@ -125,7 +125,7 @@ export default function OrderPage() {
 
             if (requestBooking.data.data.paymentId) {
                 const requestPayment = await axios.patch(
-                    `https://pijar-camp-batch15-tickitz.cyclic.app/rizqi/ticket/purchase/${requestBooking.data.data.paymentId}`,
+                    `https://tikitz-v2.adaptable.app/rizqi/ticket/purchase/${requestBooking.data.data.paymentId}`,
                     {
                         //empty-body-data
                     },

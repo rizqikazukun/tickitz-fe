@@ -23,12 +23,12 @@ const MovieDetail = () => {
         try {
             const detail = await axios({
                 method: 'get',
-                url: `https://pijar-camp-batch15-tickitz.cyclic.app/rizqi/movie/detail/${slug}`
+                url: `https://tikitz-v2.adaptable.app/rizqi/movie/detail/${slug}`
             })
 
             const cinemas = await axios({
                 method: 'get',
-                url: `https://pijar-camp-batch15-tickitz.cyclic.app/rizqi/movie/${slug}/cinemas`
+                url: `https://tikitz-v2.adaptable.app/rizqi/movie/${slug}/cinemas`
             })
 
             setMovieStatusCode(detail.status)

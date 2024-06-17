@@ -22,7 +22,7 @@ export default function ForgotPassword() {
     const resetButtonHandler = () => {
         axios({
             method: 'post', 
-            url: 'https://pijar-camp-batch15-tickitz.cyclic.app/rizqi/auth/forgot-password',
+            url: 'https://tikitz-v2.adaptable.app/rizqi/auth/forgot-password',
             data: {
                 email
             }
